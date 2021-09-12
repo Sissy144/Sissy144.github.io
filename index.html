@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
 
   </li>
   </ul>
@@ -159,6 +159,92 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/leetcode-0912/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/12/leetcode-0912/" class="post-title-link" itemprop="url">用 Rand7() 实现 Rand10()</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-12 00:00:00 / 修改时间：16:41:51" itemprop="dateCreated datePublished" datetime="2021-09-12T00:00:00+08:00">2021-09-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-parenthesis-string/">678. 有效的括号字符串</a></p>
+<p>方法1:动态规划</p>
+<p>dp表示i到j为有效的字符串。</p>
+<p>1.初始 所有*号都是有效的</p>
+<p>2.如果满足左右为括号也是有效的</p>
+<p>3.状态方程递推 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var checkValidString = function(s) &#123;</span><br><span class="line">    let len=s.length;</span><br><span class="line">    let dp=Array.from(&#123;length:len&#125;,()=&gt;new Array(len).fill(false));</span><br><span class="line">    for(let i=0;i&lt;len;i++)&#123;</span><br><span class="line">        if(s[i]===&#x27;*&#x27;)&#123;</span><br><span class="line">            dp[i][i]=true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(let i=1;i&lt;len;i++)&#123;</span><br><span class="line">        if((s[i-1]==&#x27;(&#x27;||s[i-1]===&#x27;*&#x27;)&amp;&amp;(s[i]==&#x27;)&#x27;||s[i]===&#x27;*&#x27;))&#123;</span><br><span class="line">            dp[i-1][i]=true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(let i=len-3;i&gt;=0;i--)&#123;</span><br><span class="line">        for(let j=i+2;j&lt;len;j++)&#123;</span><br><span class="line">             if((s[i]==&#x27;(&#x27;||s[i]===&#x27;*&#x27;)&amp;&amp;(s[j]==&#x27;)&#x27;||s[j]===&#x27;*&#x27;))&#123;</span><br><span class="line">                dp[i][j]=dp[i+1][j-1];</span><br><span class="line">            &#125;</span><br><span class="line">            for(let k=i;k&lt;j&amp;&amp;!dp[i][j];k++)&#123;</span><br><span class="line">                dp[i][j]=dp[i][k]&amp;&amp;dp[k+1][j]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[0][len-1];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>方法2:栈</p>
+<p>用两个栈一个存左括号，一个存*号。遇到右括号优先弹出左括号再弹出星号。</p>
+<p>最后对两个栈进行遍历。要满足星号变为右括号和左括号进行配对。</p>
+<p>最后需要左括号栈为空。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var checkValidString = function(s)&#123;</span><br><span class="line">    let lstack=[];</span><br><span class="line">    let starstack=[];</span><br><span class="line">    for(let i=0;i&lt;s.length;i++)&#123;</span><br><span class="line">        if(s[i]===&#x27;(&#x27;) lstack.push(i);</span><br><span class="line">        else if(s[i]===&#x27;*&#x27;) starstack.push(i);</span><br><span class="line">        else &#123;</span><br><span class="line">            if(lstack.length&gt;0) lstack.pop();</span><br><span class="line">            else if(starstack.length&gt;0) starstack.pop();</span><br><span class="line">            else return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    while(lstack.length&amp;&amp;starstack.length)&#123;</span><br><span class="line">        if(lstack.pop()&gt;starstack.pop())&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return lstack.length===0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法3:贪心</p>
+<p>正序遍历，把星号当作左括号。确保有足够的左括号进行配对。</p>
+<p>逆序遍历，把星号充当右括号。确保有足够的右括号进行配对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var checkValidString = function(s)&#123;</span><br><span class="line">    let cnt=0;</span><br><span class="line">    for(let i=0;i&lt;s.length;i++)&#123;</span><br><span class="line">        if(s[i]===&#x27;)&#x27;) cnt--;</span><br><span class="line">        else cnt++;</span><br><span class="line"></span><br><span class="line">        if(cnt&lt;0) return false;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cnt=0;</span><br><span class="line">    for(let i=s.length-1;i&gt;=0;i--)&#123;</span><br><span class="line">        if(s[i]===&#x27;(&#x27;) cnt--;</span><br><span class="line">        else cnt++;</span><br><span class="line"></span><br><span class="line">         if(cnt&lt;0) return false;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -239,6 +325,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/10/leetcode-0911/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/10/leetcode-0911/" class="post-title-link" itemprop="url">不含连续1的非负整数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-10 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-10T00:00:00+08:00">2021-09-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-11 22:30:31" itemprop="dateModified" datetime="2021-09-11T22:30:31+08:00">2021-09-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/non-negative-integers-without-consecutive-ones/">600. 不含连续1的非负整数</a></p>
+<p>难度指数较高。</p>
+<p>有点抽象 理解起来有点难。</p>
+<p>主要是通过建立0/1字典树。</p>
+<p>动态规划方程![截屏2021-09-11下午10.26.45](/Users/yangzhaoyu/Library/Application Support/typora-user-images/截屏2021-09-11下午10.26.45.png)</p>
+<p>dp[i]表示高度为i，根节点为0 的满二叉树的符合条件的路径数。</p>
+<p>查询顺序是从高到低的，自顶向下的。</p>
+<p>不停迭代，如果有右子树存在，则左子树一定是满二叉树，直接加dp[i],如果右子树不存在，也继续对左子树递归查询。如果已经发现有连续的两个1，则一定不符合条件，退出。</p>
+<p>最后是为了加上唯一被遗忘的最外面的那条路径。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">var findIntegers = function(n) &#123;</span><br><span class="line">    const dp = new Array(31).fill(0);</span><br><span class="line">    dp[0] = dp[1] = 1;</span><br><span class="line">    for (let i = 2; i &lt; 31; ++i) &#123;</span><br><span class="line">        dp[i] = dp[i - 1] + dp[i - 2];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let pre = 0, res = 0;</span><br><span class="line">    for (let i = 29; i &gt;= 0; --i) &#123;</span><br><span class="line">        let val = 1 &lt;&lt; i; //1 10 100 1000</span><br><span class="line">        //是否有右子树</span><br><span class="line">        if ((n &amp; val) !== 0) &#123; //表明n的最高位也是1 则有右子树</span><br><span class="line">            //左子树是满二叉树 加上路径 递归求解右子树</span><br><span class="line">            res += dp[i + 1];</span><br><span class="line">            if (pre === 1) &#123;</span><br><span class="line">                // 上一层为 1，之后要处理的右子树根节点肯定也为 1</span><br><span class="line">                // 此时连续两个 1，则后续的都是在已经有连续1的情况下求的，不合条件 可以直接退出</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            //当前根节点为1</span><br><span class="line">            pre = 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //无右子树</span><br><span class="line">            pre = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        //最右边的一条路径 被遗忘的路径</span><br><span class="line">        if (i === 0) &#123;</span><br><span class="line">            ++res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return res;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/09/leetcode-0909/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -297,6 +468,86 @@
 <p>3.非最后一行且多个，则需要计算对应的空格分配，填充即可。</p>
 <p><strong>最终代码</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;string[]&#125; words</span><br><span class="line"> * @param &#123;number&#125; maxWidth</span><br><span class="line"> * @return &#123;string[]&#125;</span><br><span class="line"> */</span><br><span class="line">var fullJustify = function(words, maxWidth) &#123;</span><br><span class="line">    const ans=[];</span><br><span class="line">    let start=0,n=words.length;</span><br><span class="line">    while(true)&#123;</span><br><span class="line">        const left=start;</span><br><span class="line">        let sumLen=0;</span><br><span class="line">        //计算当前行能放置的最大单词数</span><br><span class="line">        while(start&lt;n&amp;&amp;sumLen+words[start].length+start-left&lt;=maxWidth)&#123;</span><br><span class="line">            sumLen+=words[start].length;</span><br><span class="line">            start++;</span><br><span class="line">        &#125;</span><br><span class="line">        //假如是最后一行</span><br><span class="line">        if(start===n)&#123;</span><br><span class="line">            const s=words.slice(left).join(&#x27; &#x27;); //每个单词一个空格</span><br><span class="line">            ans.push(s+blank(maxWidth-s.length));//剩余填充空格</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        const numWords=start-left; //当前放置的单词数</span><br><span class="line">        const numSpaces=maxWidth-sumLen; //本行需要填充的空格</span><br><span class="line">        //假如只有一个单词 就左对齐 直接填充空格</span><br><span class="line">        if(numWords==1)&#123;</span><br><span class="line">            ans.push(words[left]+blank(numSpaces));</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        //假如多个单词 计算 前几个填充avg+1个 后几个填充avg个</span><br><span class="line">        const avgSpaces=Math.floor(numSpaces/(numWords-1)); //计算平均空格</span><br><span class="line">        const extraSpaces=numSpaces%(numWords-1);//计算多出来的空格</span><br><span class="line">        const s1 = words.slice(left, left + extraSpaces + 1).join(blank(avgSpaces + 1)); // 拼接额外加一个空格的单词</span><br><span class="line">        const s2 = words.slice(left + extraSpaces + 1, start).join(blank(avgSpaces)); // 拼接其余单词</span><br><span class="line">        ans.push(s1 + blank(avgSpaces) + s2);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br><span class="line">const blank = (n) =&gt; &#123;</span><br><span class="line">    return new Array(n).fill(&#x27; &#x27;).join(&#x27;&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/leetcode-0908/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/08/leetcode-0908/" class="post-title-link" itemprop="url">IPO</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-08 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-08T00:00:00+08:00">2021-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-11 22:30:59" itemprop="dateModified" datetime="2021-09-11T22:30:59+08:00">2021-09-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ipo/">502. IPO</a></p>
+<p>1.资本只会随着投资加上纯利润越来越大  不会变小</p>
+<p>2.每次在当前资本下，选择可选项目中利润最大的。</p>
+<p>3.维护一个最大堆，表示当前可选择的项目中的利润，每次随着投资，更新堆，并选择堆顶元素</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">//算法具体代码</span><br><span class="line">var findMaximizedCapital = function(k, w, profits, capital) &#123;</span><br><span class="line">    const n=profits.length;</span><br><span class="line">    const arr=new Array(n);</span><br><span class="line">    for(let i=0;i&lt;n;i++)&#123;</span><br><span class="line">        arr[i]=[capital[i],profits[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    //将项目按照所需资本从小到大排序</span><br><span class="line">    arr.sort((a,b)=&gt;a[0]-b[0]);</span><br><span class="line">    const maxH=new maxHeap();</span><br><span class="line">    let cur=0;</span><br><span class="line">    for(let i=0;i&lt;k;i++)&#123;</span><br><span class="line">        while(cur&lt;n&amp;&amp;arr[cur][0]&lt;=w)&#123;</span><br><span class="line">            maxH.insert(arr[cur++][1]);</span><br><span class="line">        &#125;</span><br><span class="line">        if(maxH.size())&#123;</span><br><span class="line">            w+=maxH.pop();</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//构造最大堆</span><br><span class="line">class maxHeap&#123;</span><br><span class="line">    constructor(arr=[])&#123;</span><br><span class="line">        this.container=[];</span><br><span class="line">        if(Array.isArray(arr))&#123;</span><br><span class="line">            arr.forEach(this.insert.bind(this));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    insert(data)&#123;</span><br><span class="line">        let &#123;container&#125;=this;</span><br><span class="line">        container.push(data);</span><br><span class="line">        let index=container.length-1;</span><br><span class="line">        while(index)&#123;</span><br><span class="line">            let parent=Math.floor((index-1)/2);</span><br><span class="line">            if(container[index]&gt;container[parent])&#123;</span><br><span class="line">                swap(container,index,parent)</span><br><span class="line">                index=parent;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    pop()&#123;</span><br><span class="line">        let &#123;container&#125;=this;</span><br><span class="line">        if(container.length&lt;0) return null;</span><br><span class="line">        swap(container,0,container.length-1);</span><br><span class="line">        let res=container.pop();</span><br><span class="line">        let index=0,exchange=index*2+1;</span><br><span class="line">        while(exchange&lt;container.length)&#123;</span><br><span class="line">            let right=index*2+2;</span><br><span class="line">            if(container[right]&gt;container[exchange])&#123;</span><br><span class="line">                exchange=right;</span><br><span class="line">            &#125;</span><br><span class="line">            if(container[exchange]&lt;container[index])&#123;</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">            swap(container,index,exchange);</span><br><span class="line">            index=exchange;</span><br><span class="line">            exchange=index*2+1;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    size()&#123;</span><br><span class="line">        return this.container.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function swap(arr,i,j)&#123;</span><br><span class="line">    [arr[i],arr[j]]=[arr[j],arr[i]];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
       
@@ -469,6 +720,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/06/leetcode-0906/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/06/leetcode-0906/" class="post-title-link" itemprop="url">文本左右对其</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-06 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-06T00:00:00+08:00">2021-09-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-12 16:44:44" itemprop="dateModified" datetime="2021-09-12T16:44:44+08:00">2021-09-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/text-justification/">68. 文本左右对齐</a></p>
+<p>模拟</p>
+<p>模拟每次放置单词和空格</p>
+<p>首先 每次要放置尽可能多的单词</p>
+<p>然后讨论三种情况</p>
+<p>1.最后一行，每个单词中间一个空格，然后填充剩余空格。</p>
+<p>2.非最后一行但只有一个，则左对齐，剩下的填充空格。</p>
+<p>3.非最后一行且多个，则需要计算对应的空格分配，填充即可。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;string[]&#125; words</span><br><span class="line"> * @param &#123;number&#125; maxWidth</span><br><span class="line"> * @return &#123;string[]&#125;</span><br><span class="line"> */</span><br><span class="line">var fullJustify = function(words, maxWidth) &#123;</span><br><span class="line">    const ans=[];</span><br><span class="line">    let start=0,n=words.length;</span><br><span class="line">    while(true)&#123;</span><br><span class="line">        const left=start;</span><br><span class="line">        let sumLen=0;</span><br><span class="line">        //计算当前行能放置的最大单词数</span><br><span class="line">        while(start&lt;n&amp;&amp;sumLen+words[start].length+start-left&lt;=maxWidth)&#123;</span><br><span class="line">            sumLen+=words[start].length;</span><br><span class="line">            start++;</span><br><span class="line">        &#125;</span><br><span class="line">        //假如是最后一行</span><br><span class="line">        if(start===n)&#123;</span><br><span class="line">            const s=words.slice(left).join(&#x27; &#x27;); //每个单词一个空格</span><br><span class="line">            ans.push(s+blank(maxWidth-s.length));//剩余填充空格</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        const numWords=start-left; //当前放置的单词数</span><br><span class="line">        const numSpaces=maxWidth-sumLen; //本行需要填充的空格</span><br><span class="line">        //假如只有一个单词 就左对齐 直接填充空格</span><br><span class="line">        if(numWords==1)&#123;</span><br><span class="line">            ans.push(words[left]+blank(numSpaces));</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        //假如多个单词 计算 前几个填充avg+1个 后几个填充avg个</span><br><span class="line">        const avgSpaces=Math.floor(numSpaces/(numWords-1)); //计算平均空格</span><br><span class="line">        const extraSpaces=numSpaces%(numWords-1);//计算多出来的空格</span><br><span class="line">        const s1 = words.slice(left, left + extraSpaces + 1).join(blank(avgSpaces + 1)); // 拼接额外加一个空格的单词</span><br><span class="line">        const s2 = words.slice(left + extraSpaces + 1, start).join(blank(avgSpaces)); // 拼接其余单词</span><br><span class="line">        ans.push(s1 + blank(avgSpaces) + s2);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br><span class="line">const blank = (n) =&gt; &#123;</span><br><span class="line">    return new Array(n).fill(&#x27; &#x27;).join(&#x27;&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/05/leetcode-0905/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -525,164 +859,6 @@
 <p>因此通过rand7可以随机生成[1,49]的数字，要使得数字限定在[1,10]之内，则最大的是按照40来取舍，然后取余数。因此不断拒绝，直到得到40之内的数，然后进行取余运算使得范围在rand10。</p>
 <p><strong>最终代码</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var rand10 = function() &#123;</span><br><span class="line">    let num=(rand7()-1)*7+rand7(); </span><br><span class="line">    while(num&gt;40)&#123;</span><br><span class="line">         num=(rand7()-1)*7+rand7();</span><br><span class="line">    &#125;</span><br><span class="line">    return (num-1)%10+1</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/05/leetcode-0906/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/05/leetcode-0906/" class="post-title-link" itemprop="url">用 Rand7() 实现 Rand10()</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-05 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-05T00:00:00+08:00">2021-09-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-06 16:05:35" itemprop="dateModified" datetime="2021-09-06T16:05:35+08:00">2021-09-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-search/">704.二分查找()</a></p>
-<p>二分查找基本</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var search = function(nums, target) &#123;</span><br><span class="line">    let left=0,right=nums.length-1;</span><br><span class="line">    while(left&lt;=right)&#123;</span><br><span class="line">        let middle=Math.floor((left+right)/2)</span><br><span class="line">        if(nums[middle]&lt;target)&#123;</span><br><span class="line">            left=middle+1;</span><br><span class="line">        &#125;else if(nums[middle]&gt;target)&#123;</span><br><span class="line">            right=middle-1;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return middle</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/05/leetcode-0908/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/05/leetcode-0908/" class="post-title-link" itemprop="url">IPO</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-05 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-05T00:00:00+08:00">2021-09-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-08 14:06:54" itemprop="dateModified" datetime="2021-09-08T14:06:54+08:00">2021-09-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ipo/">502. IPO</a></p>
-<p>1.资本只会随着投资加上纯利润越来越大  不会变小</p>
-<p>2.每次在当前资本下，选择可选项目中利润最大的。</p>
-<p>3.维护一个最大堆，表示当前可选择的项目中的利润，每次随着投资，更新堆，并选择堆顶元素</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">//算法具体代码</span><br><span class="line">var findMaximizedCapital = function(k, w, profits, capital) &#123;</span><br><span class="line">    const n=profits.length;</span><br><span class="line">    const arr=new Array(n);</span><br><span class="line">    for(let i=0;i&lt;n;i++)&#123;</span><br><span class="line">        arr[i]=[capital[i],profits[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    //将项目按照所需资本从小到大排序</span><br><span class="line">    arr.sort((a,b)=&gt;a[0]-b[0]);</span><br><span class="line">    const maxH=new maxHeap();</span><br><span class="line">    let cur=0;</span><br><span class="line">    for(let i=0;i&lt;k;i++)&#123;</span><br><span class="line">        while(cur&lt;n&amp;&amp;arr[cur][0]&lt;=w)&#123;</span><br><span class="line">            maxH.insert(arr[cur++][1]);</span><br><span class="line">        &#125;</span><br><span class="line">        if(maxH.size())&#123;</span><br><span class="line">            w+=maxH.pop();</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//构造最大堆</span><br><span class="line">class maxHeap&#123;</span><br><span class="line">    constructor(arr=[])&#123;</span><br><span class="line">        this.container=[];</span><br><span class="line">        if(Array.isArray(arr))&#123;</span><br><span class="line">            arr.forEach(this.insert.bind(this));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    insert(data)&#123;</span><br><span class="line">        let &#123;container&#125;=this;</span><br><span class="line">        container.push(data);</span><br><span class="line">        let index=container.length-1;</span><br><span class="line">        while(index)&#123;</span><br><span class="line">            let parent=Math.floor((index-1)/2);</span><br><span class="line">            if(container[index]&gt;container[parent])&#123;</span><br><span class="line">                swap(container,index,parent)</span><br><span class="line">                index=parent;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    pop()&#123;</span><br><span class="line">        let &#123;container&#125;=this;</span><br><span class="line">        if(container.length&lt;0) return null;</span><br><span class="line">        swap(container,0,container.length-1);</span><br><span class="line">        let res=container.pop();</span><br><span class="line">        let index=0,exchange=index*2+1;</span><br><span class="line">        while(exchange&lt;container.length)&#123;</span><br><span class="line">            let right=index*2+2;</span><br><span class="line">            if(container[right]&gt;container[exchange])&#123;</span><br><span class="line">                exchange=right;</span><br><span class="line">            &#125;</span><br><span class="line">            if(container[exchange]&lt;container[index])&#123;</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">            swap(container,index,exchange);</span><br><span class="line">            index=exchange;</span><br><span class="line">            exchange=index*2+1;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    size()&#123;</span><br><span class="line">        return this.container.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function swap(arr,i,j)&#123;</span><br><span class="line">    [arr[i],arr[j]]=[arr[j],arr[i]];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
       
@@ -767,7 +943,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
