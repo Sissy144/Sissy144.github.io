@@ -20,19 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-<meta property="og:type" content="website">
-<meta property="og:title" content="文章分类">
-<meta property="og:url" content="http://example.com/categories/index.html">
+  <meta name="description" content="673. 最长递增子序列的个数 动态规划 另外用一个数组存储当前结尾的最长计数。 每回进行比较返回答案。 最终代码 123456789101112131415161718192021222324252627var findNumberOfLIS &#x3D; function(nums) &amp;#123;    let dp&#x3D;[];    let cnt&#x3D;[];    let maxLen&#x3D;0;    let">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最长递增子序列的个数">
+<meta property="og:url" content="http://example.com/2021/09/20/leetcode-0920/index.html">
 <meta property="og:site_name" content="sissi の blog">
-<meta property="og:description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+<meta property="og:description" content="673. 最长递增子序列的个数 动态规划 另外用一个数组存储当前结尾的最长计数。 每回进行比较返回答案。 最终代码 123456789101112131415161718192021222324252627var findNumberOfLIS &#x3D; function(nums) &amp;#123;    let dp&#x3D;[];    let cnt&#x3D;[];    let maxLen&#x3D;0;    let">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-05T07:40:01.000Z">
-<meta property="article:modified_time" content="2021-09-05T07:41:13.952Z">
+<meta property="article:published_time" content="2021-09-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-09-22T08:53:47.671Z">
 <meta property="article:author" content="sissi">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/categories/">
+<link rel="canonical" href="http://example.com/2021/09/20/leetcode-0920/">
 
 
 <script id="page-configurations">
@@ -40,13 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>文章分类 | sissi の blog
-</title>
+  <title>最长递增子序列的个数 | sissi の blog</title>
   
 
 
@@ -159,51 +159,105 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/20/leetcode-0920/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          最长递增子序列的个数
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">文章分类
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-<div class="post-meta">
+              <time title="创建时间：2021-09-20 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-20T00:00:00+08:00">2021-09-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 16:53:47" itemprop="dateModified" datetime="2021-09-22T16:53:47+08:00">2021-09-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/">673. 最长递增子序列的个数</a></p>
+<p>动态规划 另外用一个数组存储当前结尾的最长计数。</p>
+<p>每回进行比较返回答案。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var findNumberOfLIS = function(nums) &#123;</span><br><span class="line">    let dp=[];</span><br><span class="line">    let cnt=[];</span><br><span class="line">    let maxLen=0;</span><br><span class="line">    let ans=0;</span><br><span class="line">    for(let i=0;i&lt;nums.length;i++)&#123;</span><br><span class="line">        dp[i]=1;</span><br><span class="line">        cnt[i]=1;</span><br><span class="line">        for(let j=0;j&lt;i;j++)&#123;</span><br><span class="line">            if(nums[i]&gt;nums[j])&#123;</span><br><span class="line">                if(dp[i]&lt;dp[j]+1)&#123;</span><br><span class="line">                    dp[i]=dp[j]+1;</span><br><span class="line">                    cnt[i]=cnt[j];</span><br><span class="line">                &#125;else if(dp[i]===dp[j]+1)&#123;</span><br><span class="line">                    cnt[i]+=cnt[j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(dp[i]&gt;maxLen)&#123;</span><br><span class="line">            maxLen=dp[i];</span><br><span class="line">            ans=cnt[i];</span><br><span class="line">        &#125;else if(dp[i]===maxLen)&#123;</span><br><span class="line">            ans+=cnt[i];</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/19/leetcode-0919/" rel="prev" title="只有两个键的键盘">
+      <i class="fa fa-chevron-left"></i> 只有两个键的键盘
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/21/leetcode-0921/" rel="next" title="最后一个单词的长度">
+      最后一个单词的长度 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="category-all-page">
-            <div class="category-all-title">
-              目前共计 2 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">leetcode每日一题</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%8B%E6%8B%9B/">秋招</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
