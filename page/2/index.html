@@ -123,7 +123,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
 
   </li>
   </ul>
@@ -159,6 +159,713 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/20/leetcode-0920/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/20/leetcode-0920/" class="post-title-link" itemprop="url">最长递增子序列的个数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-20 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-20T00:00:00+08:00">2021-09-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 16:53:47" itemprop="dateModified" datetime="2021-09-22T16:53:47+08:00">2021-09-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/">673. 最长递增子序列的个数</a></p>
+<p>动态规划 另外用一个数组存储当前结尾的最长计数。</p>
+<p>每回进行比较返回答案。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var findNumberOfLIS = function(nums) &#123;</span><br><span class="line">    let dp=[];</span><br><span class="line">    let cnt=[];</span><br><span class="line">    let maxLen=0;</span><br><span class="line">    let ans=0;</span><br><span class="line">    for(let i=0;i&lt;nums.length;i++)&#123;</span><br><span class="line">        dp[i]=1;</span><br><span class="line">        cnt[i]=1;</span><br><span class="line">        for(let j=0;j&lt;i;j++)&#123;</span><br><span class="line">            if(nums[i]&gt;nums[j])&#123;</span><br><span class="line">                if(dp[i]&lt;dp[j]+1)&#123;</span><br><span class="line">                    dp[i]=dp[j]+1;</span><br><span class="line">                    cnt[i]=cnt[j];</span><br><span class="line">                &#125;else if(dp[i]===dp[j]+1)&#123;</span><br><span class="line">                    cnt[i]+=cnt[j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(dp[i]&gt;maxLen)&#123;</span><br><span class="line">            maxLen=dp[i];</span><br><span class="line">            ans=cnt[i];</span><br><span class="line">        &#125;else if(dp[i]===maxLen)&#123;</span><br><span class="line">            ans+=cnt[i];</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/19/leetcode-0919/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/19/leetcode-0919/" class="post-title-link" itemprop="url">只有两个键的键盘</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-19 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-19T00:00:00+08:00">2021-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 16:30:28" itemprop="dateModified" datetime="2021-09-22T16:30:28+08:00">2021-09-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/2-keys-keyboard/">650. 只有两个键的键盘</a></p>
+<p>动态规划 由于只有paste全部的选项，所以能够缩减步骤的就是复制然后粘贴的步骤。所以找到最大的那个因子，在那个基础上执行复制即可。</p>
+<p>满足动态规划条件，这次的状态由之前的递推出来。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var minSteps = function(n) &#123;</span><br><span class="line">    //dp[i]表示 输出i个字母需要的操作次数。</span><br><span class="line">    let dp=[0,0];</span><br><span class="line">    let count=0;</span><br><span class="line">    for(let i=2;i&lt;=n;i++)&#123;</span><br><span class="line">        dp[i]=i;</span><br><span class="line">        for(let j=Math.floor(i/2);j&gt;1;j--)&#123;</span><br><span class="line">            if(i%j===0) &#123;</span><br><span class="line">                dp[i]=dp[j]+(i/j);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[n];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/18/leetcode-0918/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/18/leetcode-0918/" class="post-title-link" itemprop="url">Nim游戏</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-18 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-18T00:00:00+08:00">2021-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 16:11:39" itemprop="dateModified" datetime="2021-09-22T16:11:39+08:00">2021-09-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/nim-game/">292. Nim 游戏</a></p>
+<p>数学推理 牛啊。</p>
+<p>到最后要让对手面对4，你才能赢。</p>
+<p>因此在每次选择的过程中 发现只有当不为4的倍数的时候，对方就可以让你面对4的倍数。</p>
+<p>所以只有让对手面对4的倍数的时候，你会赢。你面对4的倍数，则你会输。</p>
+<p>所以你下手的时候要让对手面对4的倍数。 发现只有不为4的倍数的时候，你的选择才能让对手面对4的倍数。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var canWinNim = function(n) &#123;</span><br><span class="line">    return n%4!==0;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/17/leetcode-0917/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/17/leetcode-0917/" class="post-title-link" itemprop="url">有效的数独</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-17 00:00:00 / 修改时间：21:06:58" itemprop="dateCreated datePublished" datetime="2021-09-17T00:00:00+08:00">2021-09-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-sudoku/">36. 有效的数独</a></p>
+<p>一次遍历，用多余的空间来做哈希表。</p>
+<p>空间换时间。每次遍历都验证是否符合条件。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var isValidSudoku = function(board) &#123;</span><br><span class="line">    const rows = new Array(9).fill(0).map(() =&gt; new Array(9).fill(0));</span><br><span class="line">    const columns = new Array(9).fill(0).map(() =&gt; new Array(9).fill(0));</span><br><span class="line">    const subboxes = new Array(3).fill(0).map(() =&gt; new Array(3).fill(0).map(() =&gt; new Array(9).fill(0)));</span><br><span class="line">    for (let i = 0; i &lt; 9; i++) &#123;</span><br><span class="line">        for (let j = 0; j &lt; 9; j++) &#123;</span><br><span class="line">            const c = board[i][j];</span><br><span class="line">            if (c !== &#x27;.&#x27;) &#123;</span><br><span class="line">                const index = c.charCodeAt() - &#x27;0&#x27;.charCodeAt() - 1;</span><br><span class="line">                rows[i][index]++;</span><br><span class="line">                columns[j][index]++;</span><br><span class="line">                subboxes[Math.floor(i / 3)][Math.floor(j / 3)][index]++;</span><br><span class="line">                if (rows[i][index] &gt; 1 || columns[j][index] &gt; 1 || subboxes[Math.floor(i / 3)][Math.floor(j / 3)][index] &gt; 1) &#123;</span><br><span class="line">                    return false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/16/leetcode-0916/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/16/leetcode-0916/" class="post-title-link" itemprop="url">单词搜索</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-16 00:00:00 / 修改时间：20:44:10" itemprop="dateCreated datePublished" datetime="2021-09-16T00:00:00+08:00">2021-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-search-ii/">212. 单词搜索 II</a></p>
+<p>建立字典树 字典数是通过前缀查找单词的有效方法 而且把字典数的isEnd设为word 则不用返回输出word；</p>
+<p>对网格里的每一个点去匹配字典树。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;character[][]&#125; board</span><br><span class="line"> * @param &#123;string[]&#125; words</span><br><span class="line"> * @return &#123;string[]&#125;</span><br><span class="line"> */</span><br><span class="line">var findWords = function(board, words) &#123;</span><br><span class="line">    let res=[] ;</span><br><span class="line">    const [h, w] = [board.length, board[0].length];</span><br><span class="line">    // 构建字典树</span><br><span class="line">    function getTrie ( words ) &#123;</span><br><span class="line">        const root = Object.create(null);</span><br><span class="line">        for (const word of words) &#123;</span><br><span class="line">            let node = root;</span><br><span class="line">            for (const c of word) &#123;</span><br><span class="line">                if (!node[c]) node[c] = Object.create(null);</span><br><span class="line">                node = node[c];</span><br><span class="line">            &#125;</span><br><span class="line">            // 使用单词标记单词结尾</span><br><span class="line">            node.isEnd = word;</span><br><span class="line">        &#125;</span><br><span class="line">        return root;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    function dfs(trie,i,j)&#123;</span><br><span class="line">        if(trie.isEnd) &#123;</span><br><span class="line">            res.push(trie.isEnd);</span><br><span class="line">            trie.isEnd=null; //避免重复。</span><br><span class="line">        &#125;</span><br><span class="line">         // 边界条件</span><br><span class="line">        if (i &lt; 0 || j &lt; 0 || i &gt;= h || j &gt;= w) return;</span><br><span class="line"></span><br><span class="line">        // 不在字典树中，返回</span><br><span class="line">        if (!trie[board[i][j]]) return;</span><br><span class="line"></span><br><span class="line">        const temp = board[i][j];</span><br><span class="line">        // 标记已访问，以免再次遇到</span><br><span class="line">        board[i][j] = &#x27;#&#x27;;</span><br><span class="line">        dfs(trie[temp], i, j - 1);</span><br><span class="line">        dfs(trie[temp], i, j + 1);</span><br><span class="line">        dfs(trie[temp], i - 1, j);</span><br><span class="line">        dfs(trie[temp], i + 1, j);</span><br><span class="line">        // 四个方向访问完毕，恢复字符</span><br><span class="line">        board[i][j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     // 遍历网格</span><br><span class="line">    const trie = getTrie(words);</span><br><span class="line">    for (let i = 0; i &lt; h; i++) &#123;</span><br><span class="line">        for (let j = 0; j &lt; w; j++) &#123;</span><br><span class="line">            dfs(trie, i, j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/leetcode-0915/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/15/leetcode-0915/" class="post-title-link" itemprop="url">文本左右对其</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-15 00:00:00 / 修改时间：20:53:55" itemprop="dateCreated datePublished" datetime="2021-09-15T00:00:00+08:00">2021-09-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-peak-element/">162. 寻找峰值</a></p>
+<p>二分查找</p>
+<p>每次往高处爬 则可以找到峰值 。</p>
+<p>每次一定是往高处的那一边爬的，低的那一边可以抛弃。因此可以用二分查找的方法。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var findPeakElement = function(nums) &#123;</span><br><span class="line">	const n=nums.length;</span><br><span class="line">	let left=0,right=n-1,ans=-1;</span><br><span class="line">	while(left&lt;=right)&#123;</span><br><span class="line">		const mid=Math.floor((left+right)/2);</span><br><span class="line">		if(compare(nums,mid-1,mid)&lt;0&amp;&amp;compare(nums,mid,mid+1)&gt;0)&#123;</span><br><span class="line">			ans=mid;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		if(compare(nums,mid,mid+1)&lt;0)&#123;</span><br><span class="line">			left=mid+1;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			right=mid-1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const compare = (nums, idx1, idx2) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    let pre=idx1&lt;0?-Infinity:nums[idx1];</span><br><span class="line">    let after=idx2&gt;=nums.length?-Infinity:nums[idx2];</span><br><span class="line">    if(pre&lt;after) return -1;</span><br><span class="line">    else if(pre===after) return 0;</span><br><span class="line">    else return 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%950915/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/15/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%950915/" class="post-title-link" itemprop="url">华为机试0915</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-15T00:00:00+08:00">2021-09-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-24 13:29:45" itemprop="dateModified" datetime="2021-09-24T13:29:45+08:00">2021-09-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A7%8B%E6%8B%9B/" itemprop="url" rel="index"><span itemprop="name">秋招</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一：</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/heaters/">475. 供暖器</a></p>
+<p>leetcode原题 提供两种思路</p>
+<p>思路一：双指针</p>
+<p>遍历房子和暖气，不断推算出距离当前房子最近的暖气的距离。最后取这些距离中最大的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">var findRadius = function(houses, heaters) &#123;</span><br><span class="line">    houses.sort((a, b) =&gt; a - b);</span><br><span class="line">    heaters.sort((a, b) =&gt; a - b);</span><br><span class="line">    let res = 0;</span><br><span class="line">    let i = 0; // 房子指针</span><br><span class="line">    let j = 0; // 暖气指针</span><br><span class="line">    let r = 0; // 半径</span><br><span class="line">    while(i &lt; houses.length &amp;&amp; j &lt; heaters.length) &#123;</span><br><span class="line">        // 房子用右边的暖气</span><br><span class="line">        if (houses[i] &lt;= heaters[j]) &#123;</span><br><span class="line">            r = heaters[j] - houses[i];</span><br><span class="line">            i += 1;</span><br><span class="line">        // 房子左右两边的暖气都可用的时候，用距离小的那边的</span><br><span class="line">        &#125; else if (j &lt; heaters.length - 1) &#123;</span><br><span class="line">            r = Math.min(heaters[j+1] - houses[i], houses[i] - heaters[j]);</span><br><span class="line">            if (houses[i] &lt; heaters[j+1]) &#123;</span><br><span class="line">                i += 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                j += 1;</span><br><span class="line">            &#125;</span><br><span class="line">        // 暖气指针指到最后一位时，房子只能用左边的暖气</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            r = houses[i] - heaters[j];</span><br><span class="line">            i += 1</span><br><span class="line">        &#125;</span><br><span class="line">        res = Math.max(res, r)</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>思路二：二分法</p>
+<p>遍历房子，二分法查找到距离当前房子右边最近的加热站。</p>
+<p>然后得出该房子左右加热站距离自己的距离，选择最近的那一个。</p>
+<p>最后答案是这些最近距离中最远的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var findRadius = function(houses, heaters) &#123;</span><br><span class="line">//对于每个房屋，要么用前面的暖气，要么用后面的，二者取近的，得到距离；</span><br><span class="line">//对于所有的房屋，选择最大的上述距离。</span><br><span class="line">    houses.sort((a,b)=&gt;a-b);</span><br><span class="line">    heaters.sort((a,b)=&gt;a-b);</span><br><span class="line">    let n=heaters.length;</span><br><span class="line">    let res=0;</span><br><span class="line">    for(const house of houses)&#123;</span><br><span class="line">        let l=0,r=n;</span><br><span class="line">        while(l&lt;r)&#123;</span><br><span class="line">            let mid=l+Math.floor((r-l)/2);</span><br><span class="line">            if(house&gt;heaters[mid]) l=mid+1;</span><br><span class="line">            else r=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        let disToleft=(r===0)?Infinity:Math.abs(house-heaters[r-1]);</span><br><span class="line">        let disToright=(r===n)?Infinity:Math.abs(house-heaters[r]);</span><br><span class="line">        res = Math.max(res, Math.min(disToleft, disToright));</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>2</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/check-if-array-pairs-are-divisible-by-k/">1497. 检查数组对是否可以被 k 整除</a></p>
+<p>leetcode原题 重点是在计算余数的时候为了兼容负数要用(n%k+k)%k</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var canArrange = function(arr, k) &#123;</span><br><span class="line">    let dp=new Array(k).fill(0);</span><br><span class="line">    for(let i=0;i&lt;arr.length;i++)&#123;</span><br><span class="line">        let a=(arr[i]%k+k)%k;</span><br><span class="line">        dp[a]++;</span><br><span class="line">    &#125;</span><br><span class="line">    for(let i=1;i&lt;=Math.floor(k/2);i++)&#123;</span><br><span class="line">        if(dp[i]!==dp[k-i]) return false;</span><br><span class="line">    &#125;</span><br><span class="line">    if(k%2===0)&#123;</span><br><span class="line">        return dp[0]%2===0&amp;&amp;dp[k/2]%2===0</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return dp[0]%2===0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>3</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-earnings-from-taxi/">2008. 出租车的最大盈利</a></p>
+<p>可以参考这个 使用动态规划  如果不载人 直接dp[i]=dp[i-1] 如果要载人 一定是在当前条件下打折后的和比不载人的更多。最后返回开到终点的最大值就可以。</p>
+<p>中间使用pre数组 记录每个dp得到的轨迹，最后输出即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var maxTaxiEarnings = function(n, rides) &#123;</span><br><span class="line">    rides = rides.sort((a,b) =&gt; a[1] - b[1]);</span><br><span class="line">    </span><br><span class="line">    let dp = new Array(n + 1).fill(0);</span><br><span class="line"></span><br><span class="line">    let index = 0;</span><br><span class="line">    dp[0] = 0;</span><br><span class="line">    let pre = new Array(n+1).fill(-1);</span><br><span class="line">    for (let i = 1; i &lt; dp.length; i++) &#123;</span><br><span class="line">        dp[i] = dp[i - 1];</span><br><span class="line">        while ((index &lt; rides.length) &amp;&amp; (i == rides[index][1])) &#123;</span><br><span class="line">            if(dp[rides[index][0]] + (rides[index][1] - rides[index][0])*(10-(rides[index][1] - rides[index][0]))&gt; dp[i]) &#123;</span><br><span class="line">                dp[i] =dp[rides[index][0]] + (rides[index][1] - rides[index][0])*(10-(rides[index][1] - rides[index][0]));</span><br><span class="line">                pre[i]=index;</span><br><span class="line">            &#125;</span><br><span class="line">            index ++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    let i=n;</span><br><span class="line">    while(i&gt;0)&#123;</span><br><span class="line">        if(pre[i]===-1) i--;</span><br><span class="line">        else&#123;</span><br><span class="line">            console.log(rides[pre[i]]);</span><br><span class="line">            i=rides[pre[i]][0];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    return dp[dp.length - 1];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/14/leetcode-0914/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/14/leetcode-0914/" class="post-title-link" itemprop="url">通过删除字母匹配到字典里最长单词</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-14 00:00:00 / 修改时间：10:50:51" itemprop="dateCreated datePublished" datetime="2021-09-14T00:00:00+08:00">2021-09-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/">524. 通过删除字母匹配到字典里最长单词</a></p>
+<p>方法1:双指针</p>
+<p>首先对字典进行升序排序，则遍历的时候更方便。</p>
+<p>使用双指针对两个字符进行遍历匹配即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var findLongestWord = function(s, dictionary) &#123;</span><br><span class="line">    dictionary.sort();</span><br><span class="line">    let ans=&#x27;&#x27;;</span><br><span class="line">    for(let i=0;i&lt;dictionary.length;i++)&#123;</span><br><span class="line">        let temp=dictionary[i];</span><br><span class="line">        let p=0,q=0;</span><br><span class="line">        while(p&lt;temp.length&amp;&amp;q&lt;s.length)&#123;</span><br><span class="line">            if(temp[p]===s[q])&#123;</span><br><span class="line">                p++;</span><br><span class="line">                q++;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                q++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(p===temp.length)&#123;</span><br><span class="line">            if(temp.length&gt;ans.length)&#123;</span><br><span class="line">                ans=temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>方法2: 动态规划</p>
+<p>dp表示i之后 字母j出现的位置 则每次很容易通过dp找到下一个字母出现的位置 进行遍历即可。</p>
+<p>注意的是 因为dp的递推是小的从大的来，所以要逆序进行初始化赋值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">var findLongestWord = function(s, dictionary) &#123;</span><br><span class="line">    const m = s.length;</span><br><span class="line">    const f = new Array(m + 1).fill(0).map(() =&gt; new Array(26).fill(m));</span><br><span class="line">    //f[i][j]表示i之后 字母j出现的位置</span><br><span class="line"></span><br><span class="line">    for (let i = m - 1; i &gt;= 0; --i) &#123;</span><br><span class="line">        for (let j = 0; j &lt; 26; ++j) &#123;</span><br><span class="line">            if (s[i] === String.fromCharCode(&#x27;a&#x27;.charCodeAt() + j)) &#123;</span><br><span class="line">                f[i][j] = i;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                f[i][j] = f[i + 1][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    let res = &quot;&quot;;</span><br><span class="line">    for (const t of dictionary) &#123;</span><br><span class="line">        let match = true;</span><br><span class="line">        let j = 0;</span><br><span class="line">        for (let i = 0; i &lt; t.length; ++i) &#123;</span><br><span class="line">            //假如j之后 t[i]没有出现</span><br><span class="line">            if (f[j][t[i].charCodeAt() - &#x27;a&#x27;.charCodeAt()] === m) &#123;</span><br><span class="line">                match = false;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            //得到下一个字符开始遍历的位置</span><br><span class="line">            j = f[j][t[i].charCodeAt() - &#x27;a&#x27;.charCodeAt()] + 1;</span><br><span class="line">        &#125;</span><br><span class="line">        if (match) &#123;</span><br><span class="line">            //t.localeCompare(res) &lt; 0 表示t的字典序小于res</span><br><span class="line">            if (t.length &gt; res.length ||  (t.length === res.length &amp;&amp; t.localeCompare(res) &lt; 0)) &#123;</span><br><span class="line">                res = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/13/leetcode-0913/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/13/leetcode-0913/" class="post-title-link" itemprop="url">回旋镖的数量</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-13 00:00:00 / 修改时间：10:18:11" itemprop="dateCreated datePublished" datetime="2021-09-13T00:00:00+08:00">2021-09-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-boomerangs/">447. 回旋镖的数量</a></p>
+<p>遍历+枚举</p>
+<p>可以对每个节点进行便利，把每一个点都当作当下的拐点，然后计算其余点和当前拐点的距离，距离相等的放入一个哈希表中，最后对距离相等的进行排列组合即可。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var numberOfBoomerangs = function(points) &#123;</span><br><span class="line">    if(points.length&lt;3) return 0;</span><br><span class="line">    const map=&#123;&#125;;</span><br><span class="line">    let res=0;</span><br><span class="line">    points.forEach((a,i)=&gt;&#123; //遍历 把每一个点作为拐点</span><br><span class="line">        map[a]=&#123;&#125;;</span><br><span class="line">        points.forEach((b,j)=&gt;&#123;</span><br><span class="line">            if(i!==j)&#123;</span><br><span class="line">                const d=getD(a,b);</span><br><span class="line">                map[a][d]=(map[a][d]||0)+1;//距离a长度为d的数量。</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        for(const item in map[a])&#123;</span><br><span class="line">            const num=map[a][item];//距离a长度为item的数量大于2 则可以排列组合</span><br><span class="line">            if(num&gt;1) res+=num*(num-1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    return res;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const getD = ([a1, b1], [a2, b2]) =&gt; (a2 - a1) ** 2 + (b2 - b1) ** 2;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -251,646 +958,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/leetcode-0911/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/11/leetcode-0911/" class="post-title-link" itemprop="url">不含连续1的非负整数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-11 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-11T00:00:00+08:00">2021-09-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-12 16:45:42" itemprop="dateModified" datetime="2021-09-12T16:45:42+08:00">2021-09-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/non-negative-integers-without-consecutive-ones/">600. 不含连续1的非负整数</a></p>
-<p>难度指数较高。</p>
-<p>有点抽象 理解起来有点难。</p>
-<p>主要是通过建立0/1字典树。</p>
-<p>动态规划方程![截屏2021-09-11下午10.26.45](/Users/yangzhaoyu/Library/Application Support/typora-user-images/截屏2021-09-11下午10.26.45.png)</p>
-<p>dp[i]表示高度为i，根节点为0 的满二叉树的符合条件的路径数。</p>
-<p>查询顺序是从高到低的，自顶向下的。</p>
-<p>不停迭代，如果有右子树存在，则左子树一定是满二叉树，直接加dp[i],如果右子树不存在，也继续对左子树递归查询。如果已经发现有连续的两个1，则一定不符合条件，退出。</p>
-<p>最后是为了加上唯一被遗忘的最外面的那条路径。</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">var findIntegers = function(n) &#123;</span><br><span class="line">    const dp = new Array(31).fill(0);</span><br><span class="line">    dp[0] = dp[1] = 1;</span><br><span class="line">    for (let i = 2; i &lt; 31; ++i) &#123;</span><br><span class="line">        dp[i] = dp[i - 1] + dp[i - 2];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    let pre = 0, res = 0;</span><br><span class="line">    for (let i = 29; i &gt;= 0; --i) &#123;</span><br><span class="line">        let val = 1 &lt;&lt; i; //1 10 100 1000</span><br><span class="line">        //是否有右子树</span><br><span class="line">        if ((n &amp; val) !== 0) &#123; //表明n的最高位也是1 则有右子树</span><br><span class="line">            //左子树是满二叉树 加上路径 递归求解右子树</span><br><span class="line">            res += dp[i + 1];</span><br><span class="line">            if (pre === 1) &#123;</span><br><span class="line">                // 上一层为 1，之后要处理的右子树根节点肯定也为 1</span><br><span class="line">                // 此时连续两个 1，则后续的都是在已经有连续1的情况下求的，不合条件 可以直接退出</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            //当前根节点为1</span><br><span class="line">            pre = 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //无右子树</span><br><span class="line">            pre = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        //最右边的一条路径 被遗忘的路径</span><br><span class="line">        if (i === 0) &#123;</span><br><span class="line">            ++res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return res;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/10/leetcode-0910/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/10/leetcode-0910/" class="post-title-link" itemprop="url">找到需要补充粉笔的学生编号</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-10 00:00:00 / 修改时间：23:21:23" itemprop="dateCreated datePublished" datetime="2021-09-10T00:00:00+08:00">2021-09-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-student-that-will-replace-the-chalk/">1894. 找到需要补充粉笔的学生编号</a></p>
-<p>模拟</p>
-<p>简单模拟 即可</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var chalkReplacer = function(chalk, k) &#123;</span><br><span class="line">    let sum=0;</span><br><span class="line">    for(let i=0;i&lt;chalk.length;i++)&#123;</span><br><span class="line">        sum+=chalk[i];</span><br><span class="line">    &#125;</span><br><span class="line">    k=k%sum;</span><br><span class="line">    let i=0;</span><br><span class="line">    while(k&gt;=0)&#123;</span><br><span class="line">        k=k-chalk[i];</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    return i-1;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>前缀和+二分法</p>
-<p>对整个数组求前缀和，然后二分查找k所在区间即可找到那个学生。</p>
-<p>…å</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/09/leetcode-0909/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/09/leetcode-0909/" class="post-title-link" itemprop="url">文本左右对其</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-09 00:00:00 / 修改时间：22:11:42" itemprop="dateCreated datePublished" datetime="2021-09-09T00:00:00+08:00">2021-09-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/text-justification/">68. 文本左右对齐</a></p>
-<p>模拟</p>
-<p>模拟每次放置单词和空格</p>
-<p>首先 每次要放置尽可能多的单词</p>
-<p>然后讨论三种情况</p>
-<p>1.最后一行，每个单词中间一个空格，然后填充剩余空格。</p>
-<p>2.非最后一行但只有一个，则左对齐，剩下的填充空格。</p>
-<p>3.非最后一行且多个，则需要计算对应的空格分配，填充即可。</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;string[]&#125; words</span><br><span class="line"> * @param &#123;number&#125; maxWidth</span><br><span class="line"> * @return &#123;string[]&#125;</span><br><span class="line"> */</span><br><span class="line">var fullJustify = function(words, maxWidth) &#123;</span><br><span class="line">    const ans=[];</span><br><span class="line">    let start=0,n=words.length;</span><br><span class="line">    while(true)&#123;</span><br><span class="line">        const left=start;</span><br><span class="line">        let sumLen=0;</span><br><span class="line">        //计算当前行能放置的最大单词数</span><br><span class="line">        while(start&lt;n&amp;&amp;sumLen+words[start].length+start-left&lt;=maxWidth)&#123;</span><br><span class="line">            sumLen+=words[start].length;</span><br><span class="line">            start++;</span><br><span class="line">        &#125;</span><br><span class="line">        //假如是最后一行</span><br><span class="line">        if(start===n)&#123;</span><br><span class="line">            const s=words.slice(left).join(&#x27; &#x27;); //每个单词一个空格</span><br><span class="line">            ans.push(s+blank(maxWidth-s.length));//剩余填充空格</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        const numWords=start-left; //当前放置的单词数</span><br><span class="line">        const numSpaces=maxWidth-sumLen; //本行需要填充的空格</span><br><span class="line">        //假如只有一个单词 就左对齐 直接填充空格</span><br><span class="line">        if(numWords==1)&#123;</span><br><span class="line">            ans.push(words[left]+blank(numSpaces));</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        //假如多个单词 计算 前几个填充avg+1个 后几个填充avg个</span><br><span class="line">        const avgSpaces=Math.floor(numSpaces/(numWords-1)); //计算平均空格</span><br><span class="line">        const extraSpaces=numSpaces%(numWords-1);//计算多出来的空格</span><br><span class="line">        const s1 = words.slice(left, left + extraSpaces + 1).join(blank(avgSpaces + 1)); // 拼接额外加一个空格的单词</span><br><span class="line">        const s2 = words.slice(left + extraSpaces + 1, start).join(blank(avgSpaces)); // 拼接其余单词</span><br><span class="line">        ans.push(s1 + blank(avgSpaces) + s2);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br><span class="line">const blank = (n) =&gt; &#123;</span><br><span class="line">    return new Array(n).fill(&#x27; &#x27;).join(&#x27;&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/leetcode-0908/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/08/leetcode-0908/" class="post-title-link" itemprop="url">IPO</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-08 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-08T00:00:00+08:00">2021-09-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-11 22:30:59" itemprop="dateModified" datetime="2021-09-11T22:30:59+08:00">2021-09-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ipo/">502. IPO</a></p>
-<p>1.资本只会随着投资加上纯利润越来越大  不会变小</p>
-<p>2.每次在当前资本下，选择可选项目中利润最大的。</p>
-<p>3.维护一个最大堆，表示当前可选择的项目中的利润，每次随着投资，更新堆，并选择堆顶元素</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">//算法具体代码</span><br><span class="line">var findMaximizedCapital = function(k, w, profits, capital) &#123;</span><br><span class="line">    const n=profits.length;</span><br><span class="line">    const arr=new Array(n);</span><br><span class="line">    for(let i=0;i&lt;n;i++)&#123;</span><br><span class="line">        arr[i]=[capital[i],profits[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    //将项目按照所需资本从小到大排序</span><br><span class="line">    arr.sort((a,b)=&gt;a[0]-b[0]);</span><br><span class="line">    const maxH=new maxHeap();</span><br><span class="line">    let cur=0;</span><br><span class="line">    for(let i=0;i&lt;k;i++)&#123;</span><br><span class="line">        while(cur&lt;n&amp;&amp;arr[cur][0]&lt;=w)&#123;</span><br><span class="line">            maxH.insert(arr[cur++][1]);</span><br><span class="line">        &#125;</span><br><span class="line">        if(maxH.size())&#123;</span><br><span class="line">            w+=maxH.pop();</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//构造最大堆</span><br><span class="line">class maxHeap&#123;</span><br><span class="line">    constructor(arr=[])&#123;</span><br><span class="line">        this.container=[];</span><br><span class="line">        if(Array.isArray(arr))&#123;</span><br><span class="line">            arr.forEach(this.insert.bind(this));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    insert(data)&#123;</span><br><span class="line">        let &#123;container&#125;=this;</span><br><span class="line">        container.push(data);</span><br><span class="line">        let index=container.length-1;</span><br><span class="line">        while(index)&#123;</span><br><span class="line">            let parent=Math.floor((index-1)/2);</span><br><span class="line">            if(container[index]&gt;container[parent])&#123;</span><br><span class="line">                swap(container,index,parent)</span><br><span class="line">                index=parent;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    pop()&#123;</span><br><span class="line">        let &#123;container&#125;=this;</span><br><span class="line">        if(container.length&lt;0) return null;</span><br><span class="line">        swap(container,0,container.length-1);</span><br><span class="line">        let res=container.pop();</span><br><span class="line">        let index=0,exchange=index*2+1;</span><br><span class="line">        while(exchange&lt;container.length)&#123;</span><br><span class="line">            let right=index*2+2;</span><br><span class="line">            if(container[right]&gt;container[exchange])&#123;</span><br><span class="line">                exchange=right;</span><br><span class="line">            &#125;</span><br><span class="line">            if(container[exchange]&lt;container[index])&#123;</span><br><span class="line">                break</span><br><span class="line">            &#125;</span><br><span class="line">            swap(container,index,exchange);</span><br><span class="line">            index=exchange;</span><br><span class="line">            exchange=index*2+1;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    size()&#123;</span><br><span class="line">        return this.container.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function swap(arr,i,j)&#123;</span><br><span class="line">    [arr[i],arr[j]]=[arr[j],arr[i]];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/07/leetcode-0907/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/07/leetcode-0907/" class="post-title-link" itemprop="url">分割平衡字符串</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-07 00:00:00 / 修改时间：12:01:15" itemprop="dateCreated datePublished" datetime="2021-09-07T00:00:00+08:00">2021-09-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/split-a-string-in-balanced-strings/">1221.分割平衡字符串</a></p>
-<p>很简单</p>
-<p>自己做的时候没什么想法 就忽然想到可以这样做就做了 感觉就是 既然要分的最多，那么肯定是从头也要分到的，所以从头开始，一旦形成一个就++</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var balancedStringSplit = function(s) &#123;</span><br><span class="line">    let count=0,ans=0;</span><br><span class="line">    for(let i=0;i&lt;s.length;i++)&#123;</span><br><span class="line">        if(s[i]===&#x27;R&#x27;)&#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            count--;</span><br><span class="line">        &#125;</span><br><span class="line">        if(count===0) ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/06/leetcode-0906/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/06/leetcode-0906/" class="post-title-link" itemprop="url">文本左右对其</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-06 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-06T00:00:00+08:00">2021-09-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-12 16:44:44" itemprop="dateModified" datetime="2021-09-12T16:44:44+08:00">2021-09-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/text-justification/">68. 文本左右对齐</a></p>
-<p>模拟</p>
-<p>模拟每次放置单词和空格</p>
-<p>首先 每次要放置尽可能多的单词</p>
-<p>然后讨论三种情况</p>
-<p>1.最后一行，每个单词中间一个空格，然后填充剩余空格。</p>
-<p>2.非最后一行但只有一个，则左对齐，剩下的填充空格。</p>
-<p>3.非最后一行且多个，则需要计算对应的空格分配，填充即可。</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;string[]&#125; words</span><br><span class="line"> * @param &#123;number&#125; maxWidth</span><br><span class="line"> * @return &#123;string[]&#125;</span><br><span class="line"> */</span><br><span class="line">var fullJustify = function(words, maxWidth) &#123;</span><br><span class="line">    const ans=[];</span><br><span class="line">    let start=0,n=words.length;</span><br><span class="line">    while(true)&#123;</span><br><span class="line">        const left=start;</span><br><span class="line">        let sumLen=0;</span><br><span class="line">        //计算当前行能放置的最大单词数</span><br><span class="line">        while(start&lt;n&amp;&amp;sumLen+words[start].length+start-left&lt;=maxWidth)&#123;</span><br><span class="line">            sumLen+=words[start].length;</span><br><span class="line">            start++;</span><br><span class="line">        &#125;</span><br><span class="line">        //假如是最后一行</span><br><span class="line">        if(start===n)&#123;</span><br><span class="line">            const s=words.slice(left).join(&#x27; &#x27;); //每个单词一个空格</span><br><span class="line">            ans.push(s+blank(maxWidth-s.length));//剩余填充空格</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        const numWords=start-left; //当前放置的单词数</span><br><span class="line">        const numSpaces=maxWidth-sumLen; //本行需要填充的空格</span><br><span class="line">        //假如只有一个单词 就左对齐 直接填充空格</span><br><span class="line">        if(numWords==1)&#123;</span><br><span class="line">            ans.push(words[left]+blank(numSpaces));</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        //假如多个单词 计算 前几个填充avg+1个 后几个填充avg个</span><br><span class="line">        const avgSpaces=Math.floor(numSpaces/(numWords-1)); //计算平均空格</span><br><span class="line">        const extraSpaces=numSpaces%(numWords-1);//计算多出来的空格</span><br><span class="line">        const s1 = words.slice(left, left + extraSpaces + 1).join(blank(avgSpaces + 1)); // 拼接额外加一个空格的单词</span><br><span class="line">        const s2 = words.slice(left + extraSpaces + 1, start).join(blank(avgSpaces)); // 拼接其余单词</span><br><span class="line">        ans.push(s1 + blank(avgSpaces) + s2);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br><span class="line">const blank = (n) =&gt; &#123;</span><br><span class="line">    return new Array(n).fill(&#x27; &#x27;).join(&#x27;&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/06/%E7%AC%94%E8%AF%95-0906/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/06/%E7%AC%94%E8%AF%95-0906/" class="post-title-link" itemprop="url">腾讯笔试0905（前端方向）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-06 00:00:00 / 修改时间：18:42:49" itemprop="dateCreated datePublished" datetime="2021-09-06T00:00:00+08:00">2021-09-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A7%8B%E6%8B%9B/" itemprop="url" rel="index"><span itemprop="name">秋招</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>1、操作dom元素 使得点击表头可以对整张表格进行排序。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-tag">table</span>&#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">border-collapse</span>: collapse;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">360px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">table-layout</span>: fixed;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">thead</span>&#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">background</span>: <span class="number">#f5f7fa</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">thead</span> <span class="selector-tag">th</span>&#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">font-weight</span>: strong;</span></span><br><span class="line"><span class="css">            <span class="attribute">cursor</span>: pointer;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">thead</span> <span class="selector-tag">th</span><span class="selector-pseudo">:hover</span>&#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">color</span>: <span class="number">#25bb9b</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">td</span>,<span class="selector-tag">th</span>&#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#e1e1e1</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">text-align</span>: center;</span></span><br><span class="line"><span class="css">            <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">0</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>ID<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>QQ号码<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>score<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>1<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>60006<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>22<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>2<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>20002<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>11<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>3<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>30003<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>66<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>4<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>10001<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>33<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>5<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>50005<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>44<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>6<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>40004<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>55<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> order = &#123;</span></span><br><span class="line"><span class="javascript">    init (param) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> that = <span class="built_in">this</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> table = param.el;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (!table) <span class="keyword">return</span>;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// <span class="doctag">TODO:</span> 获取tbody节点</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> tbody = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;tbody&#x27;</span>)[<span class="number">0</span>];</span></span><br><span class="line"><span class="javascript">        <span class="comment">// <span class="doctag">TODO:</span> 获取所有th节点，并将其转为数组</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> ths =[]</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> th = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;th&#x27;</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;th.length;i++)&#123;ths.push(th[i])&#125;;</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// <span class="doctag">TODO:</span> 获取所有tr节点，并将其转为数组</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> trs =[]</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> tr = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;tr&#x27;</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;tr.length;i++)&#123;trs.push(tr[i])&#125;;</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> list = <span class="built_in">this</span>.getBodyList(trs);</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">        ths.forEach(<span class="function">(<span class="params">th, index</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">            </span></span><br><span class="line"><span class="javascript">            <span class="comment">// <span class="doctag">TODO:</span> 请为th绑定点击事件</span></span></span><br><span class="line"><span class="javascript">            th.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">let</span> flag = <span class="built_in">this</span>.isAsc(list,index) ;</span></span><br><span class="line"><span class="javascript">                <span class="comment">// <span class="doctag">TODO:</span> 如果当前为升序，则将list降序排序；如果当前为降序，则将list升序排序；</span></span></span><br><span class="line"><span class="javascript">                </span></span><br><span class="line"><span class="javascript">                list.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span>flag ? a.value[index]-b.value[index] : b.value[index]-a.value[index]);</span></span><br><span class="line"><span class="javascript">                <span class="comment">// <span class="doctag">TODO:</span> 将排序后的list重新插入tbody中</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">let</span> innerHTML=<span class="string">&#x27;&#x27;</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;list.length;i++)&#123;</span></span><br><span class="line"><span class="javascript">                    innerHTML+=<span class="string">&#x27;&lt;tr&gt;&#x27;</span>;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;list[i].value.length;j++)&#123;</span></span><br><span class="line"><span class="javascript">                        innerHTML+=<span class="string">&#x27;&lt;td&gt;&#x27;</span>+list[i].value[j]+<span class="string">&#x27;&lt;/td&gt;&#x27;</span>;</span></span><br><span class="line"><span class="javascript">                    &#125;</span></span><br><span class="line"><span class="javascript">                   innerHTML+=<span class="string">&#x27;&lt;/tr&gt;&#x27;</span></span></span><br><span class="line"><span class="javascript">                &#125;</span></span><br><span class="line"><span class="javascript">                tbody.innerHTML=innerHTML;</span></span><br><span class="line"><span class="javascript">                </span></span><br><span class="line"><span class="javascript">            &#125;);</span></span><br><span class="line"><span class="javascript">        &#125;);</span></span><br><span class="line"><span class="javascript">    &#125;,</span></span><br><span class="line"><span class="javascript">    getBodyList (trs) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> trs.map(<span class="function"><span class="params">tr</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// <span class="doctag">TODO:</span> 获取tr的所有td节点，并将其转为数组</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">const</span> tds = [];</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> td=tr.children;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;td.length;i++)&#123;</span></span><br><span class="line"><span class="javascript">                tds.push(td[i]);</span></span><br><span class="line"><span class="javascript">            &#125;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// <span class="doctag">TODO:</span> 将td的内容转为数字，��换下面0的值</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">const</span> val = tds.map(<span class="function"><span class="params">td</span> =&gt;</span> <span class="built_in">parseInt</span>(td.innerHTML));</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> &#123;<span class="attr">tr</span>: tr, <span class="attr">value</span>: val&#125;;</span></span><br><span class="line"><span class="javascript">        &#125;);</span></span><br><span class="line"><span class="javascript">    &#125;,</span></span><br><span class="line"><span class="javascript">    isAsc (list, index) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;list.length;i++)&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(list[i].value[index]&gt;list[i-<span class="number">1</span>].value[index])&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line"><span class="javascript">            &#125;</span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="literal">true</span>;</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">&#125;;</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">order.init(&#123;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// <span class="doctag">TODO:</span> 请获取class=container下的table的节点</span></span></span><br><span class="line"><span class="javascript">    <span class="attr">el</span>: <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;table&#x27;</span>)[<span class="number">0</span>]</span></span><br><span class="line"><span class="javascript">&#125;);</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>2、合并多个无序链表到有序无重复链表 </p>
-<p>先进行归并排序将无序链表变为有序，再合并。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment"> * function ListNode(x)&#123;</span></span><br><span class="line"><span class="comment"> *   this.val = x;</span></span><br><span class="line"><span class="comment"> *   this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">合并多个无序单链表到有序状态</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>a ListNode类一维数组 所有的无序单链表</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return </span>ListNode类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">solve</span>(<span class="params"> a </span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">let</span> ans=sortList(a[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;a.length;i++)&#123;</span><br><span class="line">        <span class="keyword">let</span> k=ans,t=sortList(a[i]);</span><br><span class="line">        <span class="keyword">while</span>(k!==<span class="literal">null</span>&amp;&amp;t!==<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(k.val&gt;t.val)&#123;</span><br><span class="line">                <span class="keyword">let</span> p=t.next;</span><br><span class="line">                t.next=k.next;</span><br><span class="line">                k.next=t;</span><br><span class="line">                t=p</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(k.val&lt;t.val)&#123;</span><br><span class="line">                k=k.next</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                t=t.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(t!==<span class="literal">null</span>) k.next=t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(ans);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//链表排序 归并排序 </span></span><br><span class="line"><span class="keyword">var</span> sortList = <span class="function"><span class="keyword">function</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!head || head.next === <span class="literal">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">  <span class="comment">// 使用快慢指针找到中间节点</span></span><br><span class="line">  <span class="keyword">let</span> slow = head,</span><br><span class="line">      fast = head.next;</span><br><span class="line">  <span class="keyword">while</span> (fast !== <span class="literal">null</span> &amp;&amp; fast.next !== <span class="literal">null</span>) &#123;</span><br><span class="line">    slow = slow.next;</span><br><span class="line">    fast = fast.next.next;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 分成前后两个链表</span></span><br><span class="line">  <span class="keyword">let</span> newList = slow.next;</span><br><span class="line">  slow.next = <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">// 对前后两个链表进行排序</span></span><br><span class="line">  <span class="keyword">let</span> left = sortList(head);</span><br><span class="line">  <span class="keyword">let</span> right = sortList(newList);</span><br><span class="line">  <span class="comment">// 将排序好的两个有序链表合并为一个链表</span></span><br><span class="line">  <span class="keyword">let</span> res = <span class="keyword">new</span> ListNode(-<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">let</span> nHead = res;</span><br><span class="line">  <span class="keyword">while</span> (left !== <span class="literal">null</span> &amp;&amp; right !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (left.val &lt; right.val) &#123;</span><br><span class="line">      nHead.next = left;</span><br><span class="line">      left = left.next;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      nHead.next = right;</span><br><span class="line">      right = right.next;</span><br><span class="line">    &#125;</span><br><span class="line">    nHead = nHead.next;</span><br><span class="line">  &#125;</span><br><span class="line">  nHead.next = left === <span class="literal">null</span> ? right : left;</span><br><span class="line">  <span class="keyword">return</span> res.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>3、字符串增加千分位</p>
-<p>4、数组合并去重排序</p>
-<p>5、找出给定序列中的子序列 满足子序列两端的值为整个序列的最小值和次小值，即序列两端以外的数一定大于等于左边的数且大于等于最右边的数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法1:动态规划 动态规划 dp[i][j]表示[i,j]的最小值。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">validSeq</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> count=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> n=arr.length;</span><br><span class="line">    <span class="keyword">let</span> dp=<span class="built_in">Array</span>.from(&#123;<span class="attr">length</span>:n&#125;,<span class="function">()=&gt;</span><span class="keyword">new</span> <span class="built_in">Array</span>.fill(<span class="built_in">Number</span>.MAX_VALUE));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        dp[i][i]=arr[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=i+<span class="number">1</span>;j&lt;n;j++)&#123;</span><br><span class="line">            dp[i][j]=<span class="built_in">Math</span>.min(dp[i][j-<span class="number">1</span>],arr[j])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=i+<span class="number">1</span>;j&lt;arr.length;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(j-i==<span class="number">1</span>)&#123;</span><br><span class="line">               count++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[j]&lt;=dp[i+<span class="number">1</span>][j-<span class="number">1</span>]&amp;&amp;arr[i]&lt;=dp[i+<span class="number">1</span>][j-<span class="number">1</span>])&#123;</span><br><span class="line">                    count++:</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法2:空间优化 使用一个变量记录最小值即可</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">validSeq2</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> ans=[];</span><br><span class="line">        <span class="keyword">let</span> count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">let</span> min;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> j=i+<span class="number">1</span>;j&lt;arr.length;j++)&#123;</span><br><span class="line">                <span class="comment">//min记录i+1 到 j-1的最小值</span></span><br><span class="line">                <span class="keyword">if</span>(j-i==<span class="number">1</span>)&#123;</span><br><span class="line">                   count++;</span><br><span class="line">                   ans.push(arr.slice(i,j+<span class="number">1</span>));</span><br><span class="line">                   min=arr[j];</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[j]&lt;=min&amp;&amp;arr[i]&lt;=min)&#123;</span><br><span class="line">                        count++;</span><br><span class="line">                        ans.push(arr.slice(i,j+<span class="number">1</span>));</span><br><span class="line">                    &#125;</span><br><span class="line">                    min=<span class="built_in">Math</span>.min(min,arr[j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//方法3: 单调栈 待完善 </span></span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">validSeq3</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> count=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> st=[];</span><br><span class="line">    st.push(arr[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">        deque(st,i,arr);</span><br><span class="line">        st.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(st);</span><br><span class="line">    <span class="keyword">return</span> count+st.length-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">deque</span>(<span class="params">st,i,arr</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//维护 队列 每个栈顶元素和和要push进来的可以形成一个有效序列</span></span><br><span class="line">        <span class="keyword">let</span> d=<span class="number">0</span>; <span class="comment">//弹出去的个数</span></span><br><span class="line">        <span class="keyword">while</span>(st[st.length-<span class="number">1</span>]&gt;arr[i]&amp;&amp;st.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            st.pop();</span><br><span class="line">            d++;</span><br><span class="line">        &#125;</span><br><span class="line">        count+=d*<span class="number">2</span>-<span class="number">1</span> <span class="comment">//表示 栈顶元素到要push进来+长度为2的 </span></span><br><span class="line">        <span class="comment">//假如不空 则当前栈顶元素和要push进来的也可以形成一个有效序列</span></span><br><span class="line">        <span class="keyword">if</span>(st.length!==<span class="number">0</span>) count++;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/05/leetcode-0905/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/05/leetcode-0905/" class="post-title-link" itemprop="url">用 Rand7() 实现 Rand10()</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-05 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-05T00:00:00+08:00">2021-09-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-06 13:47:13" itemprop="dateModified" datetime="2021-09-06T13:47:13+08:00">2021-09-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-rand10-using-rand7/">470. 用Rand7()实现Rand10()</a></p>
-<p>面试经典题目。</p>
-<p><strong>拒绝采样</strong>：生成的随机数满足要求就返回随机数，否则不断生成，直到生成一个满足要求的随机数为止。保证每个生成随机数的概率是相同的。</p>
-<p><strong>规律</strong></p>
-<p>已知RandM随机生成[1,M]的数字。则（randX() - 1）* Y + randY() 会随机生成[1,X*Y]的数字，且概率相等。</p>
-<p>因此通过rand7可以随机生成[1,49]的数字，要使得数字限定在[1,10]之内，则最大的是按照40来取舍，然后取余数。因此不断拒绝，直到得到40之内的数，然后进行取余运算使得范围在rand10。</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var rand10 = function() &#123;</span><br><span class="line">    let num=(rand7()-1)*7+rand7(); </span><br><span class="line">    while(num&gt;40)&#123;</span><br><span class="line">         num=(rand7()-1)*7+rand7();</span><br><span class="line">    &#125;</span><br><span class="line">    return (num-1)%10+1</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -958,7 +1029,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -971,7 +1042,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

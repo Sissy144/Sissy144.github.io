@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一： 475. 供暖器 leetcode原题 提供两种思路 思路一：双指针 遍历房子和暖气，不断推算出距离当前房子最近的暖气的距离。最后取这些距离中最大的 1234567891011121314151617181920212223242526272829var findRadius &#x3D; function(houses, heaters) &amp;#123;    houses.sort((a, b) &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华为机试0915">
+<meta property="og:url" content="http://example.com/2021/09/15/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%950915/index.html">
+<meta property="og:site_name" content="sissi の blog">
+<meta property="og:description" content="一： 475. 供暖器 leetcode原题 提供两种思路 思路一：双指针 遍历房子和暖气，不断推算出距离当前房子最近的暖气的距离。最后取这些距离中最大的 1234567891011121314151617181920212223242526272829var findRadius &#x3D; function(houses, heaters) &amp;#123;    houses.sort((a, b) &#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-09-24T05:29:45.921Z">
+<meta property="article:author" content="sissi">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="华为">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/09/15/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%950915/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>华为机试0915 | sissi の blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">sissi の blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">keep study</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%950915/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          华为机试0915
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-15T00:00:00+08:00">2021-09-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-24 13:29:45" itemprop="dateModified" datetime="2021-09-24T13:29:45+08:00">2021-09-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A7%8B%E6%8B%9B/" itemprop="url" rel="index"><span itemprop="name">秋招</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>一：</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/heaters/">475. 供暖器</a></p>
+<p>leetcode原题 提供两种思路</p>
+<p>思路一：双指针</p>
+<p>遍历房子和暖气，不断推算出距离当前房子最近的暖气的距离。最后取这些距离中最大的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">var findRadius = function(houses, heaters) &#123;</span><br><span class="line">    houses.sort((a, b) =&gt; a - b);</span><br><span class="line">    heaters.sort((a, b) =&gt; a - b);</span><br><span class="line">    let res = 0;</span><br><span class="line">    let i = 0; // 房子指针</span><br><span class="line">    let j = 0; // 暖气指针</span><br><span class="line">    let r = 0; // 半径</span><br><span class="line">    while(i &lt; houses.length &amp;&amp; j &lt; heaters.length) &#123;</span><br><span class="line">        // 房子用右边的暖气</span><br><span class="line">        if (houses[i] &lt;= heaters[j]) &#123;</span><br><span class="line">            r = heaters[j] - houses[i];</span><br><span class="line">            i += 1;</span><br><span class="line">        // 房子左右两边的暖气都可用的时候，用距离小的那边的</span><br><span class="line">        &#125; else if (j &lt; heaters.length - 1) &#123;</span><br><span class="line">            r = Math.min(heaters[j+1] - houses[i], houses[i] - heaters[j]);</span><br><span class="line">            if (houses[i] &lt; heaters[j+1]) &#123;</span><br><span class="line">                i += 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                j += 1;</span><br><span class="line">            &#125;</span><br><span class="line">        // 暖气指针指到最后一位时，房子只能用左边的暖气</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            r = houses[i] - heaters[j];</span><br><span class="line">            i += 1</span><br><span class="line">        &#125;</span><br><span class="line">        res = Math.max(res, r)</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>思路二：二分法</p>
+<p>遍历房子，二分法查找到距离当前房子右边最近的加热站。</p>
+<p>然后得出该房子左右加热站距离自己的距离，选择最近的那一个。</p>
+<p>最后答案是这些最近距离中最远的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var findRadius = function(houses, heaters) &#123;</span><br><span class="line">//对于每个房屋，要么用前面的暖气，要么用后面的，二者取近的，得到距离；</span><br><span class="line">//对于所有的房屋，选择最大的上述距离。</span><br><span class="line">    houses.sort((a,b)=&gt;a-b);</span><br><span class="line">    heaters.sort((a,b)=&gt;a-b);</span><br><span class="line">    let n=heaters.length;</span><br><span class="line">    let res=0;</span><br><span class="line">    for(const house of houses)&#123;</span><br><span class="line">        let l=0,r=n;</span><br><span class="line">        while(l&lt;r)&#123;</span><br><span class="line">            let mid=l+Math.floor((r-l)/2);</span><br><span class="line">            if(house&gt;heaters[mid]) l=mid+1;</span><br><span class="line">            else r=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        let disToleft=(r===0)?Infinity:Math.abs(house-heaters[r-1]);</span><br><span class="line">        let disToright=(r===n)?Infinity:Math.abs(house-heaters[r]);</span><br><span class="line">        res = Math.max(res, Math.min(disToleft, disToright));</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>2</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/check-if-array-pairs-are-divisible-by-k/">1497. 检查数组对是否可以被 k 整除</a></p>
+<p>leetcode原题 重点是在计算余数的时候为了兼容负数要用(n%k+k)%k</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var canArrange = function(arr, k) &#123;</span><br><span class="line">    let dp=new Array(k).fill(0);</span><br><span class="line">    for(let i=0;i&lt;arr.length;i++)&#123;</span><br><span class="line">        let a=(arr[i]%k+k)%k;</span><br><span class="line">        dp[a]++;</span><br><span class="line">    &#125;</span><br><span class="line">    for(let i=1;i&lt;=Math.floor(k/2);i++)&#123;</span><br><span class="line">        if(dp[i]!==dp[k-i]) return false;</span><br><span class="line">    &#125;</span><br><span class="line">    if(k%2===0)&#123;</span><br><span class="line">        return dp[0]%2===0&amp;&amp;dp[k/2]%2===0</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return dp[0]%2===0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>3</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-earnings-from-taxi/">2008. 出租车的最大盈利</a></p>
+<p>可以参考这个 使用动态规划  如果不载人 直接dp[i]=dp[i-1] 如果要载人 一定是在当前条件下打折后的和比不载人的更多。最后返回开到终点的最大值就可以。</p>
+<p>中间使用pre数组 记录每个dp得到的轨迹，最后输出即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var maxTaxiEarnings = function(n, rides) &#123;</span><br><span class="line">    rides = rides.sort((a,b) =&gt; a[1] - b[1]);</span><br><span class="line">    </span><br><span class="line">    let dp = new Array(n + 1).fill(0);</span><br><span class="line"></span><br><span class="line">    let index = 0;</span><br><span class="line">    dp[0] = 0;</span><br><span class="line">    let pre = new Array(n+1).fill(-1);</span><br><span class="line">    for (let i = 1; i &lt; dp.length; i++) &#123;</span><br><span class="line">        dp[i] = dp[i - 1];</span><br><span class="line">        while ((index &lt; rides.length) &amp;&amp; (i == rides[index][1])) &#123;</span><br><span class="line">            if(dp[rides[index][0]] + (rides[index][1] - rides[index][0])*(10-(rides[index][1] - rides[index][0]))&gt; dp[i]) &#123;</span><br><span class="line">                dp[i] =dp[rides[index][0]] + (rides[index][1] - rides[index][0])*(10-(rides[index][1] - rides[index][0]));</span><br><span class="line">                pre[i]=index;</span><br><span class="line">            &#125;</span><br><span class="line">            index ++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    let i=n;</span><br><span class="line">    while(i&gt;0)&#123;</span><br><span class="line">        if(pre[i]===-1) i--;</span><br><span class="line">        else&#123;</span><br><span class="line">            console.log(rides[pre[i]]);</span><br><span class="line">            i=rides[pre[i]][0];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    return dp[dp.length - 1];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E5%8D%8E%E4%B8%BA/" rel="tag"># 华为</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/14/leetcode-0914/" rel="prev" title="通过删除字母匹配到字典里最长单词">
+      <i class="fa fa-chevron-left"></i> 通过删除字母匹配到字典里最长单词
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/15/leetcode-0915/" rel="next" title="文本左右对其">
+      文本左右对其 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sissi"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">sissi</p>
+  <div class="site-description" itemprop="description">以后面试官问你你有博客吗～ 你可以说我有～</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sissi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
