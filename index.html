@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">30</span></a>
 
   </li>
   </ul>
@@ -159,6 +159,135 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/05/leetcode-0705/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/05/leetcode-0705/" class="post-title-link" itemprop="url">我的日程安排表 I</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-05 00:00:00 / 修改时间：21:16:25" itemprop="dateCreated datePublished" datetime="2022-07-05T00:00:00+08:00">2022-07-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="729-我的日程安排表-I"><a href="#729-我的日程安排表-I" class="headerlink" title="729. 我的日程安排表 I"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/my-calendar-i/">729. 我的日程安排表 I</a></h4><p>首先想到的是按规律插入然后从小到大比较来判断是否在可行区间内。</p>
+<p>但由于从小到大，因此可以考虑使用二分法来降低复杂度。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var MyCalendar = function() &#123;</span><br><span class="line">    this.booked=[];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">MyCalendar.prototype.book = function(start, end) &#123;</span><br><span class="line">   if(this.booked.length)&#123;</span><br><span class="line">   		let left = 0;</span><br><span class="line">	   	let right = this.booked.length;</span><br><span class="line">	   	while(left&lt;right)&#123;</span><br><span class="line">	   		const mid = Math.floor((left+right)/2);</span><br><span class="line">	   		const [s,e] = this.booked[mid];</span><br><span class="line">	   		if(start&gt;=e)&#123;</span><br><span class="line">	   			left = mid+1;</span><br><span class="line">	   		&#125;else if(end&lt;=s)&#123;</span><br><span class="line">	   			right = mid;</span><br><span class="line">	   		&#125;else &#123;</span><br><span class="line">	   			return false;</span><br><span class="line">	   		&#125;</span><br><span class="line">	   	&#125;</span><br><span class="line">   		this.booked.splice(left, 0, [start,end]);</span><br><span class="line">   		return true;</span><br><span class="line">   	&#125;else &#123;</span><br><span class="line">   		this.booked.push([start, end]);</span><br><span class="line">   		return true;</span><br><span class="line">   	&#125;</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/02/%E6%96%87%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/02/%E6%96%87%E7%AB%A0/" class="post-title-link" itemprop="url">文章</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-02 08:53:12" itemprop="dateCreated datePublished" datetime="2021-11-02T08:53:12+08:00">2021-11-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -756,157 +885,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/22/leetcode-0922/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/22/leetcode-0922/" class="post-title-link" itemprop="url">分割链表</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-22 00:00:00 / 修改时间：15:59:59" itemprop="dateCreated datePublished" datetime="2021-09-22T00:00:00+08:00">2021-09-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/split-linked-list-in-parts/">725. 分隔链表</a></p>
-<p>一次遍历 得到长度 然后得到每个数组应该分配的长度</p>
-<p>二次遍历，进行分配和截断</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">var splitListToParts = function(head, k) &#123;</span><br><span class="line">    let p=head;</span><br><span class="line">    let count=0;</span><br><span class="line">    while(p) &#123;</span><br><span class="line">        p=p.next;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    let n = Math.floor(count/k);</span><br><span class="line">    let m = count%k;</span><br><span class="line">    p = head;</span><br><span class="line">    let ans=[];</span><br><span class="line">    for(let i=0;i&lt;k;i++)&#123;</span><br><span class="line">        let tempans=new ListNode(0);</span><br><span class="line">        let temp=tempans;</span><br><span class="line">        for(let j=0;j&lt;n;j++)&#123;</span><br><span class="line">            temp.next=p;</span><br><span class="line">            p=p.next;</span><br><span class="line">            temp=temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        if(m&gt;0)&#123;</span><br><span class="line">            temp.next=p;</span><br><span class="line">            p=p.next;</span><br><span class="line">            temp=temp.next;</span><br><span class="line">            m--;</span><br><span class="line">        &#125;</span><br><span class="line">        temp.next=null;</span><br><span class="line">        ans.push(tempans.next);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/21/leetcode-0921/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/21/leetcode-0921/" class="post-title-link" itemprop="url">最后一个单词的长度</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-21 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-21T00:00:00+08:00">2021-09-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-22 17:01:04" itemprop="dateModified" datetime="2021-09-22T17:01:04+08:00">2021-09-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/length-of-last-word/">58. 最后一个单词的长度</a></p>
-<p>api解决</p>
-<p>或者找到最后一个字母 然后反向遍历。</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var lengthOfLastWord = function(s) &#123;</span><br><span class="line">    s=s.trim();</span><br><span class="line">    s=s.split(&#x27; &#x27;);</span><br><span class="line">    return s[s.length-1].length;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -978,7 +956,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1018,7 +996,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">30</span></a>
 
   </li>
   </ul>
@@ -159,6 +159,157 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/22/leetcode-0922/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/22/leetcode-0922/" class="post-title-link" itemprop="url">分割链表</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-22 00:00:00 / 修改时间：15:59:59" itemprop="dateCreated datePublished" datetime="2021-09-22T00:00:00+08:00">2021-09-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/split-linked-list-in-parts/">725. 分隔链表</a></p>
+<p>一次遍历 得到长度 然后得到每个数组应该分配的长度</p>
+<p>二次遍历，进行分配和截断</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">var splitListToParts = function(head, k) &#123;</span><br><span class="line">    let p=head;</span><br><span class="line">    let count=0;</span><br><span class="line">    while(p) &#123;</span><br><span class="line">        p=p.next;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    let n = Math.floor(count/k);</span><br><span class="line">    let m = count%k;</span><br><span class="line">    p = head;</span><br><span class="line">    let ans=[];</span><br><span class="line">    for(let i=0;i&lt;k;i++)&#123;</span><br><span class="line">        let tempans=new ListNode(0);</span><br><span class="line">        let temp=tempans;</span><br><span class="line">        for(let j=0;j&lt;n;j++)&#123;</span><br><span class="line">            temp.next=p;</span><br><span class="line">            p=p.next;</span><br><span class="line">            temp=temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        if(m&gt;0)&#123;</span><br><span class="line">            temp.next=p;</span><br><span class="line">            p=p.next;</span><br><span class="line">            temp=temp.next;</span><br><span class="line">            m--;</span><br><span class="line">        &#125;</span><br><span class="line">        temp.next=null;</span><br><span class="line">        ans.push(tempans.next);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/21/leetcode-0921/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/21/leetcode-0921/" class="post-title-link" itemprop="url">最后一个单词的长度</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-21 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-21T00:00:00+08:00">2021-09-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-22 17:01:04" itemprop="dateModified" datetime="2021-09-22T17:01:04+08:00">2021-09-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/length-of-last-word/">58. 最后一个单词的长度</a></p>
+<p>api解决</p>
+<p>或者找到最后一个字母 然后反向遍历。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var lengthOfLastWord = function(s) &#123;</span><br><span class="line">    s=s.trim();</span><br><span class="line">    s=s.split(&#x27; &#x27;);</span><br><span class="line">    return s[s.length-1].length;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -793,171 +944,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/13/leetcode-0913/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/13/leetcode-0913/" class="post-title-link" itemprop="url">回旋镖的数量</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-13 00:00:00 / 修改时间：10:18:11" itemprop="dateCreated datePublished" datetime="2021-09-13T00:00:00+08:00">2021-09-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-boomerangs/">447. 回旋镖的数量</a></p>
-<p>遍历+枚举</p>
-<p>可以对每个节点进行便利，把每一个点都当作当下的拐点，然后计算其余点和当前拐点的距离，距离相等的放入一个哈希表中，最后对距离相等的进行排列组合即可。</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var numberOfBoomerangs = function(points) &#123;</span><br><span class="line">    if(points.length&lt;3) return 0;</span><br><span class="line">    const map=&#123;&#125;;</span><br><span class="line">    let res=0;</span><br><span class="line">    points.forEach((a,i)=&gt;&#123; //遍历 把每一个点作为拐点</span><br><span class="line">        map[a]=&#123;&#125;;</span><br><span class="line">        points.forEach((b,j)=&gt;&#123;</span><br><span class="line">            if(i!==j)&#123;</span><br><span class="line">                const d=getD(a,b);</span><br><span class="line">                map[a][d]=(map[a][d]||0)+1;//距离a长度为d的数量。</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        for(const item in map[a])&#123;</span><br><span class="line">            const num=map[a][item];//距离a长度为item的数量大于2 则可以排列组合</span><br><span class="line">            if(num&gt;1) res+=num*(num-1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    return res;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const getD = ([a1, b1], [a2, b2]) =&gt; (a2 - a1) ** 2 + (b2 - b1) ** 2;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/leetcode-0912/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/12/leetcode-0912/" class="post-title-link" itemprop="url">有效的括号字符串</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-12 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-12T00:00:00+08:00">2021-09-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-14 10:51:20" itemprop="dateModified" datetime="2021-09-14T10:51:20+08:00">2021-09-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-parenthesis-string/">678. 有效的括号字符串</a></p>
-<p>方法1:动态规划</p>
-<p>dp表示i到j为有效的字符串。</p>
-<p>1.初始 所有*号都是有效的</p>
-<p>2.如果满足左右为括号也是有效的</p>
-<p>3.状态方程递推 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var checkValidString = function(s) &#123;</span><br><span class="line">    let len=s.length;</span><br><span class="line">    let dp=Array.from(&#123;length:len&#125;,()=&gt;new Array(len).fill(false));</span><br><span class="line">    for(let i=0;i&lt;len;i++)&#123;</span><br><span class="line">        if(s[i]===&#x27;*&#x27;)&#123;</span><br><span class="line">            dp[i][i]=true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(let i=1;i&lt;len;i++)&#123;</span><br><span class="line">        if((s[i-1]==&#x27;(&#x27;||s[i-1]===&#x27;*&#x27;)&amp;&amp;(s[i]==&#x27;)&#x27;||s[i]===&#x27;*&#x27;))&#123;</span><br><span class="line">            dp[i-1][i]=true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(let i=len-3;i&gt;=0;i--)&#123;</span><br><span class="line">        for(let j=i+2;j&lt;len;j++)&#123;</span><br><span class="line">             if((s[i]==&#x27;(&#x27;||s[i]===&#x27;*&#x27;)&amp;&amp;(s[j]==&#x27;)&#x27;||s[j]===&#x27;*&#x27;))&#123;</span><br><span class="line">                dp[i][j]=dp[i+1][j-1];</span><br><span class="line">            &#125;</span><br><span class="line">            for(let k=i;k&lt;j&amp;&amp;!dp[i][j];k++)&#123;</span><br><span class="line">                dp[i][j]=dp[i][k]&amp;&amp;dp[k+1][j]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[0][len-1];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>方法2:栈</p>
-<p>用两个栈一个存左括号，一个存*号。遇到右括号优先弹出左括号再弹出星号。</p>
-<p>最后对两个栈进行遍历。要满足星号变为右括号和左括号进行配对。</p>
-<p>最后需要左括号栈为空。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var checkValidString = function(s)&#123;</span><br><span class="line">    let lstack=[];</span><br><span class="line">    let starstack=[];</span><br><span class="line">    for(let i=0;i&lt;s.length;i++)&#123;</span><br><span class="line">        if(s[i]===&#x27;(&#x27;) lstack.push(i);</span><br><span class="line">        else if(s[i]===&#x27;*&#x27;) starstack.push(i);</span><br><span class="line">        else &#123;</span><br><span class="line">            if(lstack.length&gt;0) lstack.pop();</span><br><span class="line">            else if(starstack.length&gt;0) starstack.pop();</span><br><span class="line">            else return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    while(lstack.length&amp;&amp;starstack.length)&#123;</span><br><span class="line">        if(lstack.pop()&gt;starstack.pop())&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return lstack.length===0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>方法3:贪心</p>
-<p>正序遍历，把星号当作左括号。确保有足够的左括号进行配对。</p>
-<p>逆序遍历，把星号充当右括号。确保有足够的右括号进行配对</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var checkValidString = function(s)&#123;</span><br><span class="line">    let cnt=0;</span><br><span class="line">    for(let i=0;i&lt;s.length;i++)&#123;</span><br><span class="line">        if(s[i]===&#x27;)&#x27;) cnt--;</span><br><span class="line">        else cnt++;</span><br><span class="line"></span><br><span class="line">        if(cnt&lt;0) return false;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cnt=0;</span><br><span class="line">    for(let i=s.length-1;i&gt;=0;i--)&#123;</span><br><span class="line">        if(s[i]===&#x27;(&#x27;) cnt--;</span><br><span class="line">        else cnt++;</span><br><span class="line"></span><br><span class="line">         if(cnt&lt;0) return false;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1029,7 +1015,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1069,7 +1055,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
