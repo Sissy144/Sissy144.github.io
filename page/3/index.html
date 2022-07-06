@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">30</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">31</span></a>
 
   </li>
   </ul>
@@ -159,6 +159,86 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/14/leetcode-0914/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/14/leetcode-0914/" class="post-title-link" itemprop="url">通过删除字母匹配到字典里最长单词</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-14 00:00:00 / 修改时间：10:50:51" itemprop="dateCreated datePublished" datetime="2021-09-14T00:00:00+08:00">2021-09-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/">524. 通过删除字母匹配到字典里最长单词</a></p>
+<p>方法1:双指针</p>
+<p>首先对字典进行升序排序，则遍历的时候更方便。</p>
+<p>使用双指针对两个字符进行遍历匹配即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var findLongestWord = function(s, dictionary) &#123;</span><br><span class="line">    dictionary.sort();</span><br><span class="line">    let ans=&#x27;&#x27;;</span><br><span class="line">    for(let i=0;i&lt;dictionary.length;i++)&#123;</span><br><span class="line">        let temp=dictionary[i];</span><br><span class="line">        let p=0,q=0;</span><br><span class="line">        while(p&lt;temp.length&amp;&amp;q&lt;s.length)&#123;</span><br><span class="line">            if(temp[p]===s[q])&#123;</span><br><span class="line">                p++;</span><br><span class="line">                q++;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                q++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(p===temp.length)&#123;</span><br><span class="line">            if(temp.length&gt;ans.length)&#123;</span><br><span class="line">                ans=temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>方法2: 动态规划</p>
+<p>dp表示i之后 字母j出现的位置 则每次很容易通过dp找到下一个字母出现的位置 进行遍历即可。</p>
+<p>注意的是 因为dp的递推是小的从大的来，所以要逆序进行初始化赋值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">var findLongestWord = function(s, dictionary) &#123;</span><br><span class="line">    const m = s.length;</span><br><span class="line">    const f = new Array(m + 1).fill(0).map(() =&gt; new Array(26).fill(m));</span><br><span class="line">    //f[i][j]表示i之后 字母j出现的位置</span><br><span class="line"></span><br><span class="line">    for (let i = m - 1; i &gt;= 0; --i) &#123;</span><br><span class="line">        for (let j = 0; j &lt; 26; ++j) &#123;</span><br><span class="line">            if (s[i] === String.fromCharCode(&#x27;a&#x27;.charCodeAt() + j)) &#123;</span><br><span class="line">                f[i][j] = i;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                f[i][j] = f[i + 1][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    let res = &quot;&quot;;</span><br><span class="line">    for (const t of dictionary) &#123;</span><br><span class="line">        let match = true;</span><br><span class="line">        let j = 0;</span><br><span class="line">        for (let i = 0; i &lt; t.length; ++i) &#123;</span><br><span class="line">            //假如j之后 t[i]没有出现</span><br><span class="line">            if (f[j][t[i].charCodeAt() - &#x27;a&#x27;.charCodeAt()] === m) &#123;</span><br><span class="line">                match = false;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            //得到下一个字符开始遍历的位置</span><br><span class="line">            j = f[j][t[i].charCodeAt() - &#x27;a&#x27;.charCodeAt()] + 1;</span><br><span class="line">        &#125;</span><br><span class="line">        if (match) &#123;</span><br><span class="line">            //t.localeCompare(res) &lt; 0 表示t的字典序小于res</span><br><span class="line">            if (t.length &gt; res.length ||  (t.length === res.length &amp;&amp; t.localeCompare(res) &lt; 0)) &#123;</span><br><span class="line">                res = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -878,92 +958,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/05/leetcode-0905/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/05/leetcode-0905/" class="post-title-link" itemprop="url">用 Rand7() 实现 Rand10()</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-05 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-05T00:00:00+08:00">2021-09-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-06 13:47:13" itemprop="dateModified" datetime="2021-09-06T13:47:13+08:00">2021-09-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-rand10-using-rand7/">470. 用Rand7()实现Rand10()</a></p>
-<p>面试经典题目。</p>
-<p><strong>拒绝采样</strong>：生成的随机数满足要求就返回随机数，否则不断生成，直到生成一个满足要求的随机数为止。保证每个生成随机数的概率是相同的。</p>
-<p><strong>规律</strong></p>
-<p>已知RandM随机生成[1,M]的数字。则（randX() - 1）* Y + randY() 会随机生成[1,X*Y]的数字，且概率相等。</p>
-<p>因此通过rand7可以随机生成[1,49]的数字，要使得数字限定在[1,10]之内，则最大的是按照40来取舍，然后取余数。因此不断拒绝，直到得到40之内的数，然后进行取余运算使得范围在rand10。</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var rand10 = function() &#123;</span><br><span class="line">    let num=(rand7()-1)*7+rand7(); </span><br><span class="line">    while(num&gt;40)&#123;</span><br><span class="line">         num=(rand7()-1)*7+rand7();</span><br><span class="line">    &#125;</span><br><span class="line">    return (num-1)%10+1</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1031,7 +1029,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
