@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">32</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">35</span></a>
 
   </li>
   </ul>
@@ -159,6 +159,220 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/26/leetcode-0926/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/26/leetcode-0926/" class="post-title-link" itemprop="url">两整数之和</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-26 00:00:00 / 修改时间：11:28:21" itemprop="dateCreated datePublished" datetime="2021-09-26T00:00:00+08:00">2021-09-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sum-of-two-integers/">371. 两整数之和</a></p>
+<p>首先分析 二进制相加后的结果是符合亦或运算的。只是需要处理进位</p>
+<p>所以不断的相加直至进位为0；</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var getSum = function(a, b) &#123;</span><br><span class="line">    //递归把非进位的加上进位 只到进位为0‘</span><br><span class="line">    while (b != 0) &#123;</span><br><span class="line">        const carry = (a &amp; b) &lt;&lt; 1; //进位</span><br><span class="line">        a = a ^ b; //非进位的加法</span><br><span class="line">        b = carry;</span><br><span class="line">    &#125;</span><br><span class="line">    return a;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/25/leetcode-0925/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/25/leetcode-0925/" class="post-title-link" itemprop="url">两个字符串的删除操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-25 00:00:00 / 修改时间：14:13:49" itemprop="dateCreated datePublished" datetime="2021-09-25T00:00:00+08:00">2021-09-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/">583. 两个字符串的删除操作</a></p>
+<p>动态规划 </p>
+<p>dp表示i长度的word1和j长度的word2的的匹配度 每次计算的时候要计算字符串i-1和j-1的比较。</p>
+<p><strong>最终代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var minDistance = function(word1, word2) &#123;</span><br><span class="line">    let m=word1.length;</span><br><span class="line">    let n=word2.length;</span><br><span class="line">    let dp=Array.from(&#123;length:m+1&#125;, ()=&gt;new Array(n+1).fill(0));</span><br><span class="line">    for(let i=0;i&lt;=m;i++)&#123;</span><br><span class="line">        dp[i][0]=i;</span><br><span class="line">    &#125;</span><br><span class="line">    for(let j=0;j&lt;=n;j++)&#123;</span><br><span class="line">        dp[0][j]=j;</span><br><span class="line">    &#125;</span><br><span class="line">    for(let i=1;i&lt;=m;i++)&#123;</span><br><span class="line">        for(let j=1;j&lt;=n;j++)&#123;</span><br><span class="line">            if(word1[i-1]===word2[j-1])&#123;</span><br><span class="line">                dp[i][j]=dp[i-1][j-1];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                dp[i][j]=Math.min(dp[i][j-1],dp[i-1][j])+1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[m][n];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/25/%20%E5%89%8D%E7%AB%AF%E5%8D%9A%E5%AE%A2%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/25/%20%E5%89%8D%E7%AB%AF%E5%8D%9A%E5%AE%A2%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">前端博客汇总</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-25 00:00:00 / 修改时间：10:06:30" itemprop="dateCreated datePublished" datetime="2021-09-25T00:00:00+08:00">2021-09-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A7%8B%E6%8B%9B/" itemprop="url" rel="index"><span itemprop="name">秋招</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>1.<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903966573068301">浏览器层合成与页面渲染优化</a></p>
+<p>HTML如何解析成页面，如何开启GPU加速</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -699,225 +913,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/17/leetcode-0917/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/17/leetcode-0917/" class="post-title-link" itemprop="url">有效的数独</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-17 00:00:00 / 修改时间：21:06:58" itemprop="dateCreated datePublished" datetime="2021-09-17T00:00:00+08:00">2021-09-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-sudoku/">36. 有效的数独</a></p>
-<p>一次遍历，用多余的空间来做哈希表。</p>
-<p>空间换时间。每次遍历都验证是否符合条件。</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var isValidSudoku = function(board) &#123;</span><br><span class="line">    const rows = new Array(9).fill(0).map(() =&gt; new Array(9).fill(0));</span><br><span class="line">    const columns = new Array(9).fill(0).map(() =&gt; new Array(9).fill(0));</span><br><span class="line">    const subboxes = new Array(3).fill(0).map(() =&gt; new Array(3).fill(0).map(() =&gt; new Array(9).fill(0)));</span><br><span class="line">    for (let i = 0; i &lt; 9; i++) &#123;</span><br><span class="line">        for (let j = 0; j &lt; 9; j++) &#123;</span><br><span class="line">            const c = board[i][j];</span><br><span class="line">            if (c !== &#x27;.&#x27;) &#123;</span><br><span class="line">                const index = c.charCodeAt() - &#x27;0&#x27;.charCodeAt() - 1;</span><br><span class="line">                rows[i][index]++;</span><br><span class="line">                columns[j][index]++;</span><br><span class="line">                subboxes[Math.floor(i / 3)][Math.floor(j / 3)][index]++;</span><br><span class="line">                if (rows[i][index] &gt; 1 || columns[j][index] &gt; 1 || subboxes[Math.floor(i / 3)][Math.floor(j / 3)][index] &gt; 1) &#123;</span><br><span class="line">                    return false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/16/leetcode-0916/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/16/leetcode-0916/" class="post-title-link" itemprop="url">单词搜索</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-16 00:00:00 / 修改时间：20:44:10" itemprop="dateCreated datePublished" datetime="2021-09-16T00:00:00+08:00">2021-09-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-search-ii/">212. 单词搜索 II</a></p>
-<p>建立字典树 字典数是通过前缀查找单词的有效方法 而且把字典数的isEnd设为word 则不用返回输出word；</p>
-<p>对网格里的每一个点去匹配字典树。</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;character[][]&#125; board</span><br><span class="line"> * @param &#123;string[]&#125; words</span><br><span class="line"> * @return &#123;string[]&#125;</span><br><span class="line"> */</span><br><span class="line">var findWords = function(board, words) &#123;</span><br><span class="line">    let res=[] ;</span><br><span class="line">    const [h, w] = [board.length, board[0].length];</span><br><span class="line">    // 构建字典树</span><br><span class="line">    function getTrie ( words ) &#123;</span><br><span class="line">        const root = Object.create(null);</span><br><span class="line">        for (const word of words) &#123;</span><br><span class="line">            let node = root;</span><br><span class="line">            for (const c of word) &#123;</span><br><span class="line">                if (!node[c]) node[c] = Object.create(null);</span><br><span class="line">                node = node[c];</span><br><span class="line">            &#125;</span><br><span class="line">            // 使用单词标记单词结尾</span><br><span class="line">            node.isEnd = word;</span><br><span class="line">        &#125;</span><br><span class="line">        return root;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    function dfs(trie,i,j)&#123;</span><br><span class="line">        if(trie.isEnd) &#123;</span><br><span class="line">            res.push(trie.isEnd);</span><br><span class="line">            trie.isEnd=null; //避免重复。</span><br><span class="line">        &#125;</span><br><span class="line">         // 边界条件</span><br><span class="line">        if (i &lt; 0 || j &lt; 0 || i &gt;= h || j &gt;= w) return;</span><br><span class="line"></span><br><span class="line">        // 不在字典树中，返回</span><br><span class="line">        if (!trie[board[i][j]]) return;</span><br><span class="line"></span><br><span class="line">        const temp = board[i][j];</span><br><span class="line">        // 标记已访问，以免再次遇到</span><br><span class="line">        board[i][j] = &#x27;#&#x27;;</span><br><span class="line">        dfs(trie[temp], i, j - 1);</span><br><span class="line">        dfs(trie[temp], i, j + 1);</span><br><span class="line">        dfs(trie[temp], i - 1, j);</span><br><span class="line">        dfs(trie[temp], i + 1, j);</span><br><span class="line">        // 四个方向访问完毕，恢复字符</span><br><span class="line">        board[i][j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     // 遍历网格</span><br><span class="line">    const trie = getTrie(words);</span><br><span class="line">    for (let i = 0; i &lt; h; i++) &#123;</span><br><span class="line">        for (let j = 0; j &lt; w; j++) &#123;</span><br><span class="line">            dfs(trie, i, j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/leetcode-0915/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/15/leetcode-0915/" class="post-title-link" itemprop="url">文本左右对其</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-15 00:00:00 / 修改时间：20:53:55" itemprop="dateCreated datePublished" datetime="2021-09-15T00:00:00+08:00">2021-09-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-peak-element/">162. 寻找峰值</a></p>
-<p>二分查找</p>
-<p>每次往高处爬 则可以找到峰值 。</p>
-<p>每次一定是往高处的那一边爬的，低的那一边可以抛弃。因此可以用二分查找的方法。</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var findPeakElement = function(nums) &#123;</span><br><span class="line">	const n=nums.length;</span><br><span class="line">	let left=0,right=n-1,ans=-1;</span><br><span class="line">	while(left&lt;=right)&#123;</span><br><span class="line">		const mid=Math.floor((left+right)/2);</span><br><span class="line">		if(compare(nums,mid-1,mid)&lt;0&amp;&amp;compare(nums,mid,mid+1)&gt;0)&#123;</span><br><span class="line">			ans=mid;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		if(compare(nums,mid,mid+1)&lt;0)&#123;</span><br><span class="line">			left=mid+1;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			right=mid-1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const compare = (nums, idx1, idx2) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    let pre=idx1&lt;0?-Infinity:nums[idx1];</span><br><span class="line">    let after=idx2&gt;=nums.length?-Infinity:nums[idx2];</span><br><span class="line">    if(pre&lt;after) return -1;</span><br><span class="line">    else if(pre===after) return 0;</span><br><span class="line">    else return 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -989,7 +984,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
