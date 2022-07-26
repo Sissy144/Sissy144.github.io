@@ -123,7 +123,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">36</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">37</span></a>
 
   </li>
   </ul>
@@ -159,6 +159,77 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/26/git%E5%9F%BA%E4%BA%8E%E6%97%A7%E5%88%86%E6%94%AF%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E4%BB%93%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sissi">
+      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sissi の blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/26/git%E5%9F%BA%E4%BA%8E%E6%97%A7%E5%88%86%E6%94%AF%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E4%BB%93%E5%BA%93/" class="post-title-link" itemprop="url">git基于旧分支创建新的仓库</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-26 00:00:00 / 修改时间：22:32:34" itemprop="dateCreated datePublished" datetime="2022-07-26T00:00:00+08:00">2022-07-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%97%A5%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">技术日常</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id=""><a href="#" class="headerlink" title=""></a></h4><p>今天遇到一个需求，就是基于一个老的仓库进行了开发，在推送到远程的时候发现老仓库已经被关闭因此无法直接push上去，于是需要将这个开发本地分支创建为另一个独立的仓库。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">设当前仓库为project 分支为feature/test</span><br><span class="line"></span><br><span class="line">#首先在git远程创建新的仓库，newproject，并且push到本地，和旧仓库project在一个本地文件夹</span><br><span class="line">git clone newproject</span><br><span class="line"></span><br><span class="line">#回退到顶级目录后，执行复制项目，将project芙知道newproject 是连带着当前分支和commit一起复制过来的</span><br><span class="line">cp -r project/ newproject/</span><br><span class="line"></span><br><span class="line">#切换到新的项目目录 这时候git status已经能打印出commit信息，</span><br><span class="line">cd newproject/</span><br><span class="line"></span><br><span class="line"># 查看远程仓库信息 发现打印出push和fetch的origin push的origin依旧指向原project</span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line">#修改远程仓库地址</span><br><span class="line">git remote set-url origin /newproject.url/</span><br><span class="line"></span><br><span class="line"># 再次查看远程仓库信息 发现push和fetch的origin均指向新的地址 即newprojet的url</span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line">#提交到远程 把本地的分支feture/testpush到远程 </span><br><span class="line">git push -f origin feature/test</span><br><span class="line"></span><br><span class="line">#最后merge到master即可</span><br></pre></td></tr></table></figure>
+
+<p>至此，可以创建一个新的仓库并且保持原有的commit信息，与原仓库剥离。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -830,82 +901,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/28/leetcode-0928/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sissi">
-      <meta itemprop="description" content="以后面试官问你你有博客吗～ 你可以说我有～">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="sissi の blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/28/leetcode-0928/" class="post-title-link" itemprop="url">路径总和III</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-09-28 00:00:00 / 修改时间：12:43:28" itemprop="dateCreated datePublished" datetime="2021-09-28T00:00:00+08:00">2021-09-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode每日一题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/path-sum-iii/">437. 路径总和 III</a></p>
-<p>方法一：dfs 因为可以从多个点出发，所以不用回溯，只用计算某条路径到底的值就可以了</p>
-<p>复杂度n2</p>
-<p><strong>最终代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var pathSum = function(root, targetSum) &#123;</span><br><span class="line">    if(!root) return 0;//返回0</span><br><span class="line">    let ret=dfs(root,targetSum);</span><br><span class="line">    ret+=pathSum(root.left,targetSum); //递归计算以左右节点出发的count数</span><br><span class="line">    ret+=pathSum(root.right,targetSum);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line">//当前根节点为出发点的count数</span><br><span class="line">const rootSum=(root,targetSum)=&gt;&#123;</span><br><span class="line">    let ret = 0;</span><br><span class="line">    if(root == null)&#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    const val = root.val;</span><br><span class="line">    if(val === targetSum) ret++;</span><br><span class="line">    ret+=rootSum(root.left,targetSum-val);  </span><br><span class="line">    ret+=rootSum(root.right,targetSum-val);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>方法二：前缀和+dfs 只需要遍历一次</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var pathSum=function(root, targetSum)&#123;</span><br><span class="line">    const prefix=new Map();</span><br><span class="line">    prefix.set(0,1);//前缀和为0的路径条数为1</span><br><span class="line">    return dfs(root,prefix,0,targetSum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//当前节点 当前前缀和集合 当前路径和 目标和</span><br><span class="line">const dfs=(root,prefix,curr,targetSum)=&gt;&#123;</span><br><span class="line">    if(root==null) return 0;</span><br><span class="line">    let ret=0;</span><br><span class="line">    curr+=root.val;</span><br><span class="line">    ret=prefix.get(curr-targetSum)|| 0</span><br><span class="line">    prefix.set(curr,(prefix.get(curr)||0)+1)</span><br><span class="line">    ret+=dfs(root.left,prefix,curr,targetSum);</span><br><span class="line">    ret+=dfs(root.right,prefix,curr,targetSum);</span><br><span class="line">    prefix.set(curr,(prefix.get(curr)||0)-1);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -977,7 +972,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -990,7 +985,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
